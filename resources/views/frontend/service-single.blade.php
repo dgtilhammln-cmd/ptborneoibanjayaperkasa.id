@@ -44,7 +44,7 @@
                     <!-- thumb -->
                     @if($service->image)
                     <div class="vl-thumb-larg mb-32">
-                        <img class="br-8 w-100" src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset($service->image) }}" alt="{{ $service->name }}">
+                        <img loading="lazy" class="br-8 w-100" src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset($service->image) }}" alt="{{ $service->name }}">
                     </div>
                     @endif
                     
@@ -92,12 +92,12 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 mb-30">
                             <div class="vl-service-sm-thumb">
-                                <img class="w-100 br-8" src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset($service->image) }}" alt="{{ $service->name }}">
+                                <img loading="lazy" class="w-100 br-8" src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset($service->image) }}" alt="{{ $service->name }}">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 mb-30">
                             <div class="vl-service-sm-thumb">
-                                <img class="w-100 br-8" src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset($service->image) }}" alt="{{ $service->name }}">
+                                <img loading="lazy" class="w-100 br-8" src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset($service->image) }}" alt="{{ $service->name }}">
                             </div>
                         </div>
                     </div>
@@ -277,11 +277,11 @@
                     <!-- thumb -->
                     <div class="vl-thumb">
                         @if($related->image)
-                        <img src="{{ Str::startsWith($related->image, 'http') ? $related->image : asset($related->image) }}" alt="{{ $related->name }}">
-                        <img src="{{ Str::startsWith($related->image, 'http') ? $related->image : asset($related->image) }}" alt="{{ $related->name }}">
+                        <img loading="lazy" src="{{ Str::startsWith($related->image, 'http') ? $related->image : asset($related->image) }}" alt="{{ $related->name }}">
+                        <img loading="lazy" src="{{ Str::startsWith($related->image, 'http') ? $related->image : asset($related->image) }}" alt="{{ $related->name }}">
                         @else
-                        <img src="{{ asset('assets/images/service-placeholder.jpg') }}" alt="{{ $related->name }}">
-                        <img src="{{ asset('assets/images/service-placeholder.jpg') }}" alt="{{ $related->name }}">
+                        <img loading="lazy" src="{{ asset('assets/images/service-placeholder.jpg') }}" alt="{{ $related->name }}">
+                        <img loading="lazy" src="{{ asset('assets/images/service-placeholder.jpg') }}" alt="{{ $related->name }}">
                         @endif
                     </div>
                     <!-- content -->
@@ -300,4 +300,5 @@
 
 @include('partials.cta')
 @endsection
+
 

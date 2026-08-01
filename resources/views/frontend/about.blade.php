@@ -862,7 +862,7 @@
                 <div class="col-xl-6 col-lg-6 mb-4 mb-lg-0 fade-up">
                     <div class="about-visual-wrap">
                         <div class="about-image-main">
-                            <img src="{{ asset($aboutSection['image_1'] ?? 'assets/img/barfi/SnowRemovalTwo/about/vl-about2.1.png') }}" alt="PT. Borneo Iban Jaya Perkasa - Jasa Logam">
+                            <img loading="lazy" src="{{ asset($aboutSection['image_1'] ?? 'assets/img/barfi/SnowRemovalTwo/about/vl-about2.1.png') }}" alt="PT. Borneo Iban Jaya Perkasa - Jasa Logam">
                             <div class="img-overlay"></div>
                             <div class="about-image-badge">
                                 <div class="badge-icon">🏆</div>
@@ -873,7 +873,7 @@
                             </div>
                         </div>
                         <div class="about-image-secondary">
-                            <img src="{{ asset($aboutSection['image_2'] ?? 'assets/img/barfi/SnowRemovalTwo/about/vl-about2.2.png') }}" alt="Produk Logam Berkualitas">
+                            <img loading="lazy" src="{{ asset($aboutSection['image_2'] ?? 'assets/img/barfi/SnowRemovalTwo/about/vl-about2.2.png') }}" alt="Produk Logam Berkualitas">
                             <div class="sec-label">
                                 <span>Barang Kualitas Bintang 5</span>
                                 <span class="stars">★★★★★</span>
@@ -973,7 +973,7 @@
                     <div class="choose-left-content">
                         <div class="section-label">{{ $chooseSection['subtitle'] ?? 'Mengapa Memilih Kami' }}</div>
                         <div class="choose-image-wrap mt-3">
-                            <img src="{{ asset($chooseSection['image'] ?? 'assets/img/barfi/SnowRemovalOne/choose/vl-choose-thumb-inner1.1.png') }}" alt="PT. Borneo Iban Jaya Perkasa - Workshop">
+                            <img loading="lazy" src="{{ asset($chooseSection['image'] ?? 'assets/img/barfi/SnowRemovalOne/choose/vl-choose-thumb-inner1.1.png') }}" alt="PT. Borneo Iban Jaya Perkasa - Workshop">
                             <div class="img-tag">
                                 <div class="tag-icon"><i class="fa-solid fa-shield-check"></i></div>
                                 <div>
@@ -995,7 +995,7 @@
                                 @foreach($features as $feature)
                                 <div class="feature-item">
                                     <div class="feature-icon">
-                                        <img src="{{ asset($feature['icon'] ?? 'assets/img/barfi/icon/vl-chos-icon-ab-1.1.svg') }}" alt="{{ $feature['title'] ?? '' }}">
+                                        <img loading="lazy" src="{{ asset($feature['icon'] ?? 'assets/img/barfi/icon/vl-chos-icon-ab-1.1.svg') }}" alt="{{ $feature['title'] ?? '' }}">
                                     </div>
                                     <h4 class="feature-title">{{ $feature['title'] ?? 'Feature' }}</h4>
                                     <p class="feature-desc">{{ $feature['description'] ?? '' }}</p>
@@ -1003,32 +1003,32 @@
                                 @endforeach
                             @else
                             <div class="feature-item">
-                                <div class="feature-icon"><img src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.1.svg') }}" alt="Tenaga Ahli"></div>
+                                <div class="feature-icon"><img loading="lazy" src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.1.svg') }}" alt="Tenaga Ahli"></div>
                                 <h4 class="feature-title">Tenaga Ahli Berpengalaman</h4>
                                 <p class="feature-desc">Tim kami terdiri dari profesional terlatih dengan pengalaman bertahun-tahun dalam menangani berbagai kebutuhan jasa logam.</p>
                             </div>
                             <div class="feature-item">
-                                <div class="feature-icon"><img src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.2.svg') }}" alt="Peralatan Modern"></div>
+                                <div class="feature-icon"><img loading="lazy" src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.2.svg') }}" alt="Peralatan Modern"></div>
                                 <h4 class="feature-title">Peralatan Modern & Teknologi Terkini</h4>
                                 <p class="feature-desc">Kami menggunakan mesin dan peralatan modern dengan teknologi terkini untuk menghasilkan produk dengan presisi tinggi.</p>
                             </div>
                             <div class="feature-item">
-                                <div class="feature-icon"><img src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.3.svg') }}" alt="Kepuasan Pelanggan"></div>
+                                <div class="feature-icon"><img loading="lazy" src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.3.svg') }}" alt="Kepuasan Pelanggan"></div>
                                 <h4 class="feature-title">Jaminan Kepuasan Pelanggan</h4>
                                 <p class="feature-desc">Kami berkomitmen memberikan pelayanan terbaik dan memastikan setiap klien mendapatkan hasil yang memuaskan.</p>
                             </div>
                             <div class="feature-item">
-                                <div class="feature-icon"><img src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.4.svg') }}" alt="Layanan Lengkap"></div>
+                                <div class="feature-icon"><img loading="lazy" src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.4.svg') }}" alt="Layanan Lengkap"></div>
                                 <h4 class="feature-title">Layanan Lengkap & Terintegrasi</h4>
                                 <p class="feature-desc">Dari jasa bubut, stamping, plong, moulding hingga produksi sparepart — solusi lengkap dalam satu tempat.</p>
                             </div>
                             <div class="feature-item">
-                                <div class="feature-icon"><img src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.5.svg') }}" alt="Tepat Waktu"></div>
+                                <div class="feature-icon"><img loading="lazy" src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.5.svg') }}" alt="Tepat Waktu"></div>
                                 <h4 class="feature-title">Tepat Waktu & Dapat Diandalkan</h4>
                                 <p class="feature-desc">Kami memahami pentingnya ketepatan waktu dalam industri. Setiap proyek diselesaikan sesuai jadwal yang disepakati.</p>
                             </div>
                             <div class="feature-item">
-                                <div class="feature-icon"><img src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.6.svg') }}" alt="Berpengalaman"></div>
+                                <div class="feature-icon"><img loading="lazy" src="{{ asset('assets/img/barfi/icon/vl-chos-icon-ab-1.6.svg') }}" alt="Berpengalaman"></div>
                                 <h4 class="feature-title">Terpercaya Sejak 2003</h4>
                                 <p class="feature-desc">Lebih dari 22 tahun melayani berbagai industri dengan integritas tinggi dan komitmen terhadap kepuasan pelanggan.</p>
                             </div>
@@ -1107,7 +1107,7 @@
                 </div>
                 <div class="col-xl-3 col-lg-2 d-none d-lg-flex values-image-center fade-up" style="transition-delay:0.1s">
                     <div class="values-img-wrap">
-                        <img src="{{ asset($valueSection['image'] ?? 'assets/img/barfi/SnowRemovalOne/service/vl-value-thumb1.1.png') }}" alt="PT. Borneo Iban Jaya Perkasa - Nilai">
+                        <img loading="lazy" src="{{ asset($valueSection['image'] ?? 'assets/img/barfi/SnowRemovalOne/service/vl-value-thumb1.1.png') }}" alt="PT. Borneo Iban Jaya Perkasa - Nilai">
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-5 fade-up" style="transition-delay:0.2s">
@@ -1165,7 +1165,7 @@
                             </div>
                             <p class="test-quote">"{{ $item->description }}"</p>
                             <div class="test-author">
-                                <img class="test-author-img" src="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image) }}" alt="{{ $item->title }}">
+                                <img loading="lazy" class="test-author-img" src="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image) }}" alt="{{ $item->title }}">
                                 <div class="test-author-info">
                                     <strong>{{ $item->title }}</strong>
                                     <span>{{ $item->extra_data['position'] ?? '' }}</span>
@@ -1211,7 +1211,7 @@
                 <div class="col-xl-{{ $i < 4 ? '3' : '4' }} col-md-6 mb-4 fade-up" style="transition-delay: {{ $i * 0.1 }}s">
                     <div class="team-card">
                         <div class="team-card-img">
-                            <img src="{{ asset($member['img']) }}" alt="{{ $member['name'] }}">
+                            <img loading="lazy" src="{{ asset($member['img']) }}" alt="{{ $member['name'] }}">
                             <div class="team-card-overlay">
                                 <div class="team-social">
                                     <a href="#"><i class="fa-brands fa-x-twitter"></i></a>

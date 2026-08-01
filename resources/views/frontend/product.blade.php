@@ -50,7 +50,7 @@
                         $mainImage = count($allImages) > 0 ? (Str::startsWith($allImages[0], 'http') ? $allImages[0] : asset($allImages[0])) : asset('assets/images/product-placeholder.jpg');
                     @endphp
                     <div style="width: 100%; height: 100%; position: relative;">
-                         <img src="{{ $mainImage }}" alt="{{ $product->name }}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 20px;">
+                         <img loading="lazy" src="{{ $mainImage }}" alt="{{ $product->name }}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 20px;">
                     </div>
                 </div>
             </div>
@@ -310,7 +310,7 @@
                         @php
                             $relatedImage = $related->image ? (Str::startsWith($related->image, 'http') ? $related->image : asset($related->image)) : asset('assets/images/product-placeholder.jpg');
                         @endphp
-                        <img src="{{ $relatedImage }}" alt="{{ $related->name }}" style="max-width: 90%; max-height: 90%; object-fit: contain;">
+                        <img loading="lazy" src="{{ $relatedImage }}" alt="{{ $related->name }}" style="max-width: 90%; max-height: 90%; object-fit: contain;">
                     </div>
 
                     <!-- Content Box -->
@@ -474,3 +474,4 @@
 @endpush
 
 @endsection
+

@@ -422,13 +422,13 @@
                                 <div class="img-overlay"></div>
                                 <div class="blog-card-category">Artikel</div>
                                 @if($blog->image)
-                                    <img src="{{ Str::startsWith($blog->image, 'http') ? $blog->image : asset($blog->image) }}" alt="{{ $blog->title }}">
+                                    <img loading="lazy" src="{{ Str::startsWith($blog->image, 'http') ? $blog->image : asset($blog->image) }}" alt="{{ $blog->title }}">
                                 @else
                                     @php
                                         $imageIndex = ($index % 9) + 1;
                                         $imagePath = $imageIndex <= 3 ? "SnowRemovalTwo/blog/vl-blog-2.{$imageIndex}.png" : "SnowRemovalOne/blog/vl-blog-inner1.{$imageIndex}.png";
                                     @endphp
-                                    <img src="{{ asset("assets/img/barfi/{$imagePath}") }}" alt="{{ $blog->title }}">
+                                    <img loading="lazy" src="{{ asset("assets/img/barfi/{$imagePath}") }}" alt="{{ $blog->title }}">
                                 @endif
                             </div>
                             <div class="blog-card-body">
@@ -477,7 +477,7 @@
                             <div class="blog-card-img">
                                 <div class="img-overlay"></div>
                                 <div class="blog-card-category">Artikel</div>
-                                <img src="{{ asset($post['img']) }}" alt="{{ $post['title'] }}">
+                                <img loading="lazy" src="{{ asset($post['img']) }}" alt="{{ $post['title'] }}">
                             </div>
                             <div class="blog-card-body">
                                 <div class="blog-card-meta">

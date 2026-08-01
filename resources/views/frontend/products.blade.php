@@ -60,7 +60,7 @@
                         <!-- section title start -->
                         <div class="vl-section-title mb-60">
                             <h4 class="subtitle">
-                                <span><img class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                                <span><img loading="lazy" class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
                                 {{ $introSection['subtitle'] ?? 'Produk Kami' }}
                             </h4>
                             <h2 class="title text-effect">
@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 mb-30">
                     <div class="vl-about-thumb2">
-                        <img src="{{ asset($introSection['image'] ?? 'assets/img/barfi/SnowRemovalTwo/about/vl-about2.1.png') }}" alt="PT. Borneo Iban Jaya Perkasa - Produk Sparepart">
+                        <img loading="lazy" src="{{ asset($introSection['image'] ?? 'assets/img/barfi/SnowRemovalTwo/about/vl-about2.1.png') }}" alt="PT. Borneo Iban Jaya Perkasa - Produk Sparepart">
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
             <div class="row">
                 <div class="col-xl-12 mb-60">
                     <div class="vl-section-title text-center">
-                        <h4 class="subtitle"> <span><img class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.1.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> Katalog Produk</h4>
+                        <h4 class="subtitle"> <span><img loading="lazy" class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.1.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> Katalog Produk</h4>
                         <h2 class="title">Berbagai Produk Sparepart & Aksesoris untuk Kebutuhan Industri</h2>
                         <p class="para pt-16">Kami menyediakan berbagai macam produk sparepart dan aksesori industri dengan kualitas terjamin dan harga kompetitif.</p>
                     </div>
@@ -187,7 +187,7 @@
             @php
                 $imgUrl = $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset($product->image)) : asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png");
             @endphp
-            <img src="{{ $imgUrl }}" alt="{{ $product->name }}" style="width: 90%; height: 90%; object-fit: contain; transition: transform 0.4s;">
+            <img loading="lazy" src="{{ $imgUrl }}" alt="{{ $product->name }}" style="width: 90%; height: 90%; object-fit: contain; transition: transform 0.4s;">
         </div>
 
         <!-- 2. Content Box -->
@@ -226,8 +226,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="automotive">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Motor">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Motor">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Motor">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Motor">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Suku Cadang Motor</a></h3>
@@ -241,8 +241,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="automotive">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin Mobil">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin Mobil">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin Mobil">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin Mobil">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Komponen Mesin Mobil</a></h3>
@@ -256,8 +256,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="automotive">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Aksesori Kendaraan">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Aksesori Kendaraan">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Aksesori Kendaraan">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Aksesori Kendaraan">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Aksesori Kendaraan</a></h3>
@@ -272,8 +272,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="bracket">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Bracket Baja">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Bracket Baja">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Bracket Baja">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Bracket Baja">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Bracket Baja</a></h3>
@@ -287,8 +287,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="bracket">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Mounting System">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Mounting System">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Mounting System">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Mounting System">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Mounting System</a></h3>
@@ -302,8 +302,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="bracket">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Bracket Custom">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Bracket Custom">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Bracket Custom">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Bracket Custom">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Bracket Custom</a></h3>
@@ -318,8 +318,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="sparepart">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Mesin Industri">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Mesin Industri">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Mesin Industri">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Mesin Industri">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Suku Cadang Mesin Industri</a></h3>
@@ -333,8 +333,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="sparepart">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin CNC">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin CNC">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin CNC">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin CNC">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Komponen Mesin CNC</a></h3>
@@ -348,8 +348,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="sparepart">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Sparepart Mesin Bubut">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Sparepart Mesin Bubut">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Sparepart Mesin Bubut">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Sparepart Mesin Bubut">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Sparepart Mesin Bubut</a></h3>
@@ -364,8 +364,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="accessory">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="T-Handle Tojok">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="T-Handle Tojok">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="T-Handle Tojok">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="T-Handle Tojok">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">T-Handle Tojok</a></h3>
@@ -379,8 +379,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="accessory">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Aksesori Mesin">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Aksesori Mesin">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Aksesori Mesin">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Aksesori Mesin">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Aksesori Mesin</a></h3>
@@ -394,8 +394,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="accessory">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Komponen Industri">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Komponen Industri">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Komponen Industri">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Komponen Industri">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Komponen Industri</a></h3>
@@ -410,8 +410,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="custom">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Custom Machining Parts">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Custom Machining Parts">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Custom Machining Parts">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Custom Machining Parts">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Custom Machining Parts</a></h3>
@@ -425,8 +425,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="custom">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Custom Bubut Parts">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Custom Bubut Parts">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Custom Bubut Parts">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Custom Bubut Parts">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Custom Bubut Parts</a></h3>
@@ -440,8 +440,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="custom">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Custom Stamping Parts">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Custom Stamping Parts">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Custom Stamping Parts">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Custom Stamping Parts">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Custom Stamping Parts</a></h3>
@@ -456,8 +456,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="moulding">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Moulding & Injection Parts">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Moulding & Injection Parts">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Moulding & Injection Parts">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Moulding & Injection Parts">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Moulding & Injection Parts</a></h3>
@@ -471,8 +471,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="moulding">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Plastic Moulding">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Plastic Moulding">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Plastic Moulding">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Plastic Moulding">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Plastic Moulding</a></h3>
@@ -486,8 +486,8 @@
                     <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="moulding">
                         <div class="vl-solution-box-wrap2">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Injection Moulding">
-                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Injection Moulding">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Injection Moulding">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Injection Moulding">
                             </div>
                             <div class="vl-content">
                                 <h3 class="title"><a href="{{ url("/products") }}">Injection Moulding</a></h3>
@@ -557,7 +557,7 @@
                 <div class="col-xl-12 mb-60">
                     <div class="vl-section-title text-center">
                         <h4 class="subtitle">
-                            <span><img class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                            <span><img loading="lazy" class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
                             {{ $catSubtitle }}
                         </h4>
                         <h2 class="title">{{ $catHeading }}</h2>
@@ -570,7 +570,7 @@
                 <div class="col-xl-4 col-md-6 mb-30">
                     <div class="vl-about-iconbox3 vl-about-iconbox3-inner">
                         <div class="icon">
-                            <span><img class="animate__animated animate__shakeX" src="{{ asset($cat['icon'] ?? '') }}" alt="{{ $cat['title'] ?? '' }}"></span>
+                            <span><img loading="lazy" class="animate__animated animate__shakeX" src="{{ asset($cat['icon'] ?? '') }}" alt="{{ $cat['title'] ?? '' }}"></span>
                         </div>
                         <div class="content">
                             <h4 class="title">{{ $cat['title'] ?? '' }}</h4>
@@ -608,7 +608,7 @@
                 <div class="col-xl-6 mx-auto text-center">
                     <div class="vl-section-title mb-60">
                         <h4 class="subtitle">
-                            <span><img class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                            <span><img loading="lazy" class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
                             {{ $whySubtitle }}
                         </h4>
                         <h2 class="title">{{ $whyHeading }}</h2>
@@ -660,7 +660,7 @@
                     <div class="vl-value-content-wrap">
                         <div class="vl-section-title mb-60">
                             <h4 class="subtitle">
-                                <span><img class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                                <span><img loading="lazy" class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
                                 {{ $qSubtitle }}
                             </h4>
                             <h2 class="title">{{ $qHeading }}</h2>
@@ -671,7 +671,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 mb-30">
                     <div class="vl-valu-thumb">
-                        <img src="{{ asset($qImage) }}" alt="PT. Borneo Iban Jaya Perkasa - Quality Control">
+                        <img loading="lazy" src="{{ asset($qImage) }}" alt="PT. Borneo Iban Jaya Perkasa - Quality Control">
                     </div>
                 </div>
             </div>
@@ -817,4 +817,5 @@
 @endpush
 
 @endsection
+
 

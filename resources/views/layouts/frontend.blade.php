@@ -90,8 +90,8 @@
         !function(e){"use strict";var t=function(t,n,o){var i,r=e.document,a=r.createElement("link");if(n)a.rel=n;else{if(!(i="preload"===a.rel))return;}a.href=t,a.href.indexOf("http")||(a.crossOrigin="anonymous"),"style"===n&&(a.onload=function(){this.media="all"},a.media="print"),o&&(a.onload=function(){this.onload=null,o(this)},a.onload()),r.head.appendChild(a)};e.loadCSS=t}("undefined"!=typeof global?global:this);
     </script>
     
-    <!-- Non-Critical CSS - Load asynchronously -->
-    <script>loadCSS("{{ asset('assets/css/barfi/style.css') }}","stylesheet");</script>
+    <!-- Critical CSS - Load immediately for above-the-fold content -->
+    <script>loadCSS("{{ asset('assets/css/barfi/style.min.css') }}","stylesheet");</script>
     <link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/swiper-bundle.min.css') }}" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/swiper-bundle.min.css') }}"></noscript>
     

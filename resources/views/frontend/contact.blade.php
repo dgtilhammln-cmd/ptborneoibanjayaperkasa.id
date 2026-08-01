@@ -300,7 +300,7 @@
             <div class="row mb-5" data-aos="fade-up" data-aos-delay="200">
                 <div class="col-12">
                     <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px -15px rgba(15, 36, 83, 0.12);">
-                        <img src="{{ asset($contactSection['image']) }}" alt="PT. Borneo Iban Jaya Perkasa" style="width: 100%; max-height: 420px; object-fit: cover; display: block;">
+                        <img loading="lazy" src="{{ asset($contactSection['image']) }}" alt="PT. Borneo Iban Jaya Perkasa" style="width: 100%; max-height: 420px; object-fit: cover; display: block;">
                     </div>
                 </div>
             </div>
@@ -320,7 +320,7 @@
                             @if(($card['icon_type'] ?? 'image') == 'whatsapp')
                                 <i class="fa-brands fa-whatsapp" style="font-size: 24px; color: #25D366;"></i>
                             @else
-                                <img src="{{ asset($card['icon'] ?? 'assets/img/barfi/icon/vl-contact-icon1.1.svg') }}" alt="{{ $card['title'] ?? 'Contact' }}" style="width: 26px; height: 26px; object-fit: contain;">
+                                <img loading="lazy" src="{{ asset($card['icon'] ?? 'assets/img/barfi/icon/vl-contact-icon1.1.svg') }}" alt="{{ $card['title'] ?? 'Contact' }}" style="width: 26px; height: 26px; object-fit: contain;">
                             @endif
                         </div>
                         <div>

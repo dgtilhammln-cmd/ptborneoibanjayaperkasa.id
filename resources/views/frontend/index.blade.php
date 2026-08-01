@@ -6,7 +6,7 @@
 
 @if($bannerSlider && $bannerSlider->is_active && !empty($slider_slides) && !empty($slider_slides[0]['background_image']))
 @php
-    $lcpImage = $slider_slides[0]['background_image'];
+    $lcpImage = str_replace(['.jpg', '.png'], ['.webp', '.webp'], $slider_slides[0]['background_image']);
     $lcpImageUrl = Str::startsWith($lcpImage, 'http') ? $lcpImage : asset($lcpImage);
 @endphp
 <!-- Preload LCP Image for better performance -->
@@ -27,7 +27,11 @@
                 <div class="vl-banner-area-3 fix">
                     <div class="banner-thumb-bg banner-thumb-bg-5">
                         <!-- banner thumb bg -->
-                        <img class="banner-thumb3" src="{{ !empty($slide['background_image']) ? (Str::startsWith($slide['background_image'], 'http') ? $slide['background_image'] : asset($slide['background_image'])) : asset('assets/img/barfi/Landscaping/banner/banner-thumb-bg-5.1.png') }}" alt="PT. Borneo Iban Jaya Perkasa" fetchpriority="high" loading="eager" width="1920" height="1080">
+                        @php
+                            $bgImage = !empty($slide['background_image']) ? str_replace(['.jpg', '.png'], ['.webp', '.webp'], $slide['background_image']) : 'assets/img/barfi/Landscaping/banner/banner-thumb-bg-5.1.png';
+                            $bgImageUrl = Str::startsWith($bgImage, 'http') ? $bgImage : asset($bgImage);
+                        @endphp
+                        <img class="banner-thumb3" src="{{ $bgImageUrl }}" alt="PT. Borneo Iban Jaya Perkasa" fetchpriority="high" loading="eager" width="1920" height="1080">
                         <div class="container">
                             <div class="row">
                                 <!-- banner padding -->
@@ -168,12 +172,12 @@
 
                     <!-- Main Image -->
                     <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(15, 36, 83, 0.15);">
-                        <img src="{{ $img1 }}" alt="PT. Borneo Iban Jaya Perkasa" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; transition: transform 0.7s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                        <img loading="lazy" src="{{ $img1 }}" alt="PT. Borneo Iban Jaya Perkasa" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; transition: transform 0.7s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
                     </div>
 
                     <!-- Secondary Image (Overlapping Bottom Right) -->
                     <div style="position: absolute; bottom: 0; right: 0; width: 55%; border-radius: 20px; overflow: hidden; border: 8px solid #fafbfc; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" data-aos="fade-up" data-aos-delay="100">
-                        <img src="{{ $img2 }}" alt="Workshop PT. BIJP" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;">
+                        <img loading="lazy" src="{{ $img2 }}" alt="Workshop PT. BIJP" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;">
                     </div>
 
 <!-- Floating Badge (Top Left) - FIXED -->
@@ -321,7 +325,7 @@
                             @php
                                 $imgSrc = $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset($product->image)) : asset("assets/img/barfi/Landscaping/service/vl-service-5.".(($index % 4) + 1).".png");
                             @endphp
-                            <img src="{{ $imgSrc }}" alt="{{ $product->name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            <img loading="lazy" src="{{ $imgSrc }}" alt="{{ $product->name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                             
                             <!-- Category/Badge Kecil -->
                             <div style="position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.9); backdrop-filter: blur(4px); padding: 5px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; color: #1E3A8A; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
@@ -364,7 +368,7 @@
                 <div class="col-xl-4 col-md-6 product-swipe-col">
                     <div style="background: #ffffff; border-radius: 20px; overflow: hidden; border: 1px solid #f1f5f9; height: 100%;">
                         <div style="width: 100%; aspect-ratio: 1 / 1; background: #f8fafc;">
-                            <img src="{{ asset("assets/img/barfi/Landscaping/service/vl-service-5.{$i}.png") }}" alt="Produk PT BIJP" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/Landscaping/service/vl-service-5.{$i}.png") }}" alt="Produk PT BIJP" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div style="padding: 24px;">
                             <h4 style="font-size: 20px; font-weight: 700; color: #111827; margin-bottom: 10px;">Produk Unggulan {{ $i }}</h4>
@@ -454,7 +458,7 @@
                             @php
                                 $imgSrc = $service->image ? (Str::startsWith($service->image, 'http') ? $service->image : asset($service->image)) : asset("assets/img/barfi/Landscaping/service/vl-service-5.".(($index % 3) + 1).".png");
                             @endphp
-                            <img src="{{ $imgSrc }}" alt="{{ $service->name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                            <img loading="lazy" src="{{ $imgSrc }}" alt="{{ $service->name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
                         </div>
 
                         <!-- Konten Text & SEO Support -->
@@ -521,7 +525,7 @@
                     <div class="vl-choose-content4">
                         <!-- section title start -->
                         <div class="vl-section-title mb-60">
-                            <h4 class="subtitle subtitle-5-1" data-aos="zoom-in-up"> <span><img class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.4.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> {{ $projectsSection->subtitle ?? 'Portfolio Kami' }}</h4>
+                            <h4 class="subtitle subtitle-5-1" data-aos="zoom-in-up"> <span><img loading="lazy" class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.4.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> {{ $projectsSection->subtitle ?? 'Portfolio Kami' }}</h4>
                             <h2 class="title text-effect">{{ $projectsSection->heading ?? 'Proyek-Proyek Unggulan Kami' }}</h2>
                         </div> <!-- section title End -->
                     </div>
@@ -534,7 +538,7 @@
                     <div class="col-xl-3 col-md-6 mb-30" data-aos="zoom-in-up">
                         <div class="vl-project-wrap5">
                             <div class="vl-thumb">
-                                <img src="{{ !empty($project->image) ? (Str::startsWith($project->image, 'http') ? $project->image : asset($project->image)) : asset('assets/img/barfi/Landscaping/project/vl-project-thumb-5.1.png') }}" alt="{{ $project->title }}">
+                                <img loading="lazy" src="{{ !empty($project->image) ? (Str::startsWith($project->image, 'http') ? $project->image : asset($project->image)) : asset('assets/img/barfi/Landscaping/project/vl-project-thumb-5.1.png') }}" alt="{{ $project->title }}">
                             </div>
                             <div class="vl-icon">
                                 <a href="{{ !empty($project->link) ? url($project->link) : url('/services') }}"><span><i class="fa-regular fa-arrow-right"></i></span></a>
@@ -552,7 +556,7 @@
                     <div class="col-xl-3 col-md-6 mb-30" data-aos="zoom-in-up">
                         <div class="vl-project-wrap5">
                             <div class="vl-thumb">
-                                <img src="{{ asset("assets/img/barfi/Landscaping/project/vl-project-thumb-5.{$i}.png") }}" alt="Komponen Industri">
+                                <img loading="lazy" src="{{ asset("assets/img/barfi/Landscaping/project/vl-project-thumb-5.{$i}.png") }}" alt="Komponen Industri">
                             </div>
                             <div class="vl-icon">
                                 <a href="{{ url("/services") }}"><span><i class="fa-regular fa-arrow-right"></i></span></a>
@@ -657,7 +661,7 @@
                 <div class="col-xl-3 col-md-6 work-swipe-col" data-aos="fade-up" data-aos-delay="{{ 100 + ($index * 100) }}">
                     <a href="{{ $item->link ?? '#' }}" class="work-card-premium">
                         <!-- Background Image (IG Feed Size 4:5) -->
-                        <img src="{{ !empty($item->image) ? (Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)) : asset('assets/img/barfi/Landscaping/project/vl-project-thumb-5.1.png') }}" 
+                        <img loading="lazy" src="{{ !empty($item->image) ? (Str::startsWith($item->image, 'http') ? $item->image : asset($item->image)) : asset('assets/img/barfi/Landscaping/project/vl-project-thumb-5.1.png') }}" 
                              alt="{{ $item->title }}" 
                              style="width: 100%; height: 100%; object-fit: cover; display: block;"
                              loading="lazy">
@@ -675,7 +679,7 @@
                 @for($i = 1; $i <= 4; $i++)
                 <div class="col-xl-3 col-md-6 work-swipe-col">
                     <a href="#" class="work-card-premium">
-                        <img src="{{ asset("assets/img/barfi/Landscaping/project/vl-project-thumb-5.{$i}.png") }}" alt="Panduan" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img loading="lazy" src="{{ asset("assets/img/barfi/Landscaping/project/vl-project-thumb-5.{$i}.png") }}" alt="Panduan" style="width: 100%; height: 100%; object-fit: cover;">
                         <div class="work-overlay">
                             <span style="color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px;">INFO 0{{ $i }}</span>
                             <h3 style="color: #ffffff; font-size: 20px; font-weight: 700;">Panduan Layanan Terpercaya</h3>
@@ -699,10 +703,10 @@
                 <div class="col-xl-6 col-lg-6 mb-30">
                     <div class="vl-choose-wrap5" data-aos="fade-right">
                         <div class="vl-choose-shape-thumb5">
-                            <img src="{{ asset("assets/img/barfi/shape/vl-choose-shape-5.1.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/shape/vl-choose-shape-5.1.png") }}" alt="Barfi">
                         </div>
                         <div class="vl-choose-thumb5">
-                            <img src="{{ !empty($whyChooseUsSection->image) ? asset($whyChooseUsSection->image) : asset("assets/img/barfi/Landscaping/choose/vl-choose-thumb-5.1.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ !empty($whyChooseUsSection->image) ? asset($whyChooseUsSection->image) : asset("assets/img/barfi/Landscaping/choose/vl-choose-thumb-5.1.png") }}" alt="Barfi">
                         </div>
                         <div class="vl-phonebox5">
                             <div class="icon">
@@ -722,14 +726,14 @@
                 <div class="col-xl-6 col-lg-6 mb-30">
                     <div class="vl-choose-content5">
                         <div class="vl-section-title mb-32">
-                            <h4 class="subtitle subtitle-5-1" data-aos="zoom-in-up"> <span><img class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.4.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> {{ $whyChooseUsSection->title ?? 'Mengapa Pilih Kami' }}</h4>
+                            <h4 class="subtitle subtitle-5-1" data-aos="zoom-in-up"> <span><img loading="lazy" class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.4.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> {{ $whyChooseUsSection->title ?? 'Mengapa Pilih Kami' }}</h4>
                             <h2 class="title pb-16 text-effect">{{ $whyChooseUsSection->heading ?? 'Kualitas & Kepercayaan, Setiap Proyek, Setiap Detail' }}</h2>
                             <p class="para">{{ $whyChooseUsSection->content ?? 'Memilih PT. Borneo Iban Jaya Perkasa berarti memilih tim yang peduli dengan kebutuhan industri Anda. Kami menggabungkan pengalaman, presisi, dan keandalan untuk memberikan produk dan jasa berkualitas tinggi yang memenuhi standar industri.' }}</p>
                         </div>
                         @foreach($whyChooseUsItems as $item)
                         <div class="vl-about-iconbox3 vl-about-iconbox3-4 mb-32" data-aos="zoom-in-up">
                             <div class="icon">
-                                <span><img class="animate__animated animate__shakeX" src="{{ Str::startsWith($item->icon, 'http') ? $item->icon : asset($item->icon) }}" alt="{{ $item->title }}"></span>
+                                <span><img loading="lazy" class="animate__animated animate__shakeX" src="{{ Str::startsWith($item->icon, 'http') ? $item->icon : asset($item->icon) }}" alt="{{ $item->title }}"></span>
                             </div>
                             <div class="content">
                                 <h4 class="title">{{ $item->title }}</h4>
@@ -808,7 +812,7 @@
                         <!-- Author Info -->
                         <div style="display: flex; align-items: center; gap: 15px; border-top: 1px solid #f1f5f9; pt-25; padding-top: 25px;">
                             <div style="width: 55px; height: 55px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid #E0F2FE;">
-                                <img src="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image) }}" alt="{{ $item->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img loading="lazy" src="{{ Str::startsWith($item->image, 'http') ? $item->image : asset($item->image) }}" alt="{{ $item->title }}" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <div>
                                 <h4 style="font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 2px;">{{ $item->title }}</h4>
@@ -917,7 +921,7 @@
                     
                     <!-- Image Wrapper (16:9 Aspect Ratio) -->
                     <div style="width: 100%; aspect-ratio: 16 / 10; overflow: hidden; position: relative;">
-                        <img src="{{ Str::startsWith($blog->image, 'http') ? $blog->image : asset($blog->image) }}" 
+                        <img loading="lazy" src="{{ Str::startsWith($blog->image, 'http') ? $blog->image : asset($blog->image) }}" 
                              alt="{{ $blog->title }}" 
                              style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;"
                              onmouseover="this.style.transform='scale(1.1)'" 

@@ -52,14 +52,14 @@
                             <!-- thumb -->
                             <div class="vl-thumb">
                                 @if($service->image)
-                                    <img src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset($service->image) }}" alt="{{ $service->name }}">
-                                    <img src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset($service->image) }}" alt="{{ $service->name }}">
+                                    <img loading="lazy" src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset($service->image) }}" alt="{{ $service->name }}">
+                                    <img loading="lazy" src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset($service->image) }}" alt="{{ $service->name }}">
                                 @else
                                     @php
                                         $imageIndex = ($index % 6) + 1;
                                     @endphp
-                                    <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.{$imageIndex}.png") }}" alt="{{ $service->name }}">
-                                    <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.{$imageIndex}.png") }}" alt="{{ $service->name }}">
+                                    <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.{$imageIndex}.png") }}" alt="{{ $service->name }}">
+                                    <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.{$imageIndex}.png") }}" alt="{{ $service->name }}">
                                 @endif
                             </div>
                             <!-- content -->
@@ -77,8 +77,8 @@
                     <div class="vl-solution-box-wrap2">
                         <!-- thumb -->
                         <div class="vl-thumb">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Barfi">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Barfi">
                         </div>
                         <!-- content -->
                         <div class="vl-content">
@@ -94,8 +94,8 @@
                     <div class="vl-solution-box-wrap2">
                         <!-- thumb -->
                         <div class="vl-thumb">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Barfi">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Barfi">
                         </div>
                         <!-- content -->
                         <div class="vl-content">
@@ -111,8 +111,8 @@
                     <div class="vl-solution-box-wrap2">
                         <!-- thumb -->
                         <div class="vl-thumb">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Barfi">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Barfi">
                         </div>
                         <!-- content -->
                         <div class="vl-content">
@@ -128,8 +128,8 @@
                     <div class="vl-solution-box-wrap2">
                         <!-- thumb -->
                         <div class="vl-thumb">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Barfi">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Barfi">
                         </div>
                         <!-- content -->
                         <div class="vl-content">
@@ -145,8 +145,8 @@
                     <div class="vl-solution-box-wrap2">
                         <!-- thumb -->
                         <div class="vl-thumb">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Barfi">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Barfi">
                         </div>
                         <!-- content -->
                         <div class="vl-content">
@@ -162,8 +162,8 @@
                     <div class="vl-solution-box-wrap2">
                         <!-- thumb -->
                         <div class="vl-thumb">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Barfi">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Barfi">
                         </div>
                         <!-- content -->
                         <div class="vl-content">
@@ -179,8 +179,8 @@
                     <div class="vl-solution-box-wrap2">
                         <!-- thumb -->
                         <div class="vl-thumb">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.7.png") }}" alt="Barfi">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.7.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.7.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.7.png") }}" alt="Barfi">
                         </div>
                         <!-- content -->
                         <div class="vl-content">
@@ -196,8 +196,8 @@
                     <div class="vl-solution-box-wrap2">
                         <!-- thumb -->
                         <div class="vl-thumb">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.8.png") }}" alt="Barfi">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.8.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.8.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.8.png") }}" alt="Barfi">
                         </div>
                         <!-- content -->
                         <div class="vl-content">
@@ -213,8 +213,8 @@
                     <div class="vl-solution-box-wrap2">
                         <!-- thumb -->
                         <div class="vl-thumb">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.9.png") }}" alt="Barfi">
-                            <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.9.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.9.png") }}" alt="Barfi">
+                            <img loading="lazy" src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.9.png") }}" alt="Barfi">
                         </div>
                         <!-- content -->
                         <div class="vl-content">
@@ -272,7 +272,7 @@
                     <div class="col-xl-5 mx-auto text-center">
                         <!-- section title start -->
                         <div class="vl-section-title mb-60">
-                            <h4 class="subtitle"> <span><img class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.1.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> {{ $workSection['subtitle'] ?? 'Cara Kami Bekerja' }}</h4>
+                            <h4 class="subtitle"> <span><img loading="lazy" class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.1.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> {{ $workSection['subtitle'] ?? 'Cara Kami Bekerja' }}</h4>
                             <h2 class="title">{{ $workSection['heading'] ?? 'Proses Layanan Jasa Logam & Produksi Sparepart' }}</h2>
                         </div> <!-- section title End -->
                     </div>
@@ -348,7 +348,7 @@
                 <div class="col-xl-6 mx-auto text-center">
                     <!-- section title start -->
                     <div class="vl-section-title mb-60">
-                        <h4 class="subtitle"> <span><img class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.1.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> {{ $contactSection['subtitle'] ?? 'Hubungi Kami' }}</h4>
+                        <h4 class="subtitle"> <span><img loading="lazy" class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.1.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> {{ $contactSection['subtitle'] ?? 'Hubungi Kami' }}</h4>
                         <h2 class="title">{{ $contactSection['heading'] ?? 'Layanan Profesional untuk Kebutuhan Industri Anda' }}</h2>
                     </div> <!-- section title End -->
                 </div>
@@ -419,7 +419,7 @@
                                 <!-- single icon box -->
                                 <div class="vl-single-box6 vl-single-box6-2 vl-single-box6-2-inner">
                                     <div class="vl-single-box6-icon">
-                                        <span><img src="{{ asset($card['icon'] ?? 'assets/img/barfi/icon/vl-contact-icon-6.1.svg') }}" alt="{{ $card['title'] ?? 'Contact' }}"></span>
+                                        <span><img loading="lazy" src="{{ asset($card['icon'] ?? 'assets/img/barfi/icon/vl-contact-icon-6.1.svg') }}" alt="{{ $card['title'] ?? 'Contact' }}"></span>
                                     </div>
                                     <div class="vl-single-box6-content">
                                         <h3 class="title title-2">{{ $card['title'] ?? 'Title' }}</h3>
@@ -431,7 +431,7 @@
                                 <!-- Fallback: Hardcoded contact cards -->
                                 <div class="vl-single-box6 vl-single-box6-2 vl-single-box6-2-inner">
                                     <div class="vl-single-box6-icon">
-                                        <span><img src="{{ asset("assets/img/barfi/icon/vl-contact-icon-6.1.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                                        <span><img loading="lazy" src="{{ asset("assets/img/barfi/icon/vl-contact-icon-6.1.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
                                     </div>
                                     <div class="vl-single-box6-content">
                                         <h3 class="title title-2">Alamat</h3>
@@ -440,7 +440,7 @@
                                 </div>
                                 <div class="vl-single-box6 vl-single-box6-2 vl-single-box6-2-inner">
                                     <div class="vl-single-box6-icon">
-                                        <span><img src="{{ asset("assets/img/barfi/icon/vl-contact-icon-6.2.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                                        <span><img loading="lazy" src="{{ asset("assets/img/barfi/icon/vl-contact-icon-6.2.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
                                     </div>
                                     <div class="vl-single-box6-content">
                                         <h3 class="title title-2">WhatsApp</h3>
@@ -449,7 +449,7 @@
                                 </div>
                                 <div class="vl-single-box6 vl-single-box6-2 vl-single-box6-2-inner">
                                     <div class="vl-single-box6-icon">
-                                        <span><img src="{{ asset("assets/img/barfi/icon/vl-contact-icon-6.3.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                                        <span><img loading="lazy" src="{{ asset("assets/img/barfi/icon/vl-contact-icon-6.3.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
                                     </div>
                                     <div class="vl-single-box6-content">
                                         <h3 class="title title-2">Jam Operasional</h3>
@@ -458,7 +458,7 @@
                                 </div>
                                 <div class="vl-single-box6 vl-single-box6-2 vl-single-box6-2-inner">
                                     <div class="vl-single-box6-icon">
-                                        <span><img src="{{ asset("assets/img/barfi/icon/vl-contact-icon-6.4.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                                        <span><img loading="lazy" src="{{ asset("assets/img/barfi/icon/vl-contact-icon-6.4.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
                                     </div>
                                     <div class="vl-single-box6-content">
                                         <h3 class="title title-2">Email</h3>
@@ -487,3 +487,4 @@
 
    
 @endsection
+

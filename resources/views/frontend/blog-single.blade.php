@@ -73,7 +73,7 @@
                     <!-- Main Featured Image -->
                     @if($blog->image)
                     <div style="border-radius: 24px; overflow: hidden; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                        <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" style="width: 100%; height: auto; display: block; object-fit: cover;">
+                        <img loading="lazy" src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" style="width: 100%; height: auto; display: block; object-fit: cover;">
                     </div>
                     @endif
 
@@ -164,9 +164,9 @@
                                 <div style="width: 70px; height: 70px; border-radius: 12px; overflow: hidden; flex-shrink: 0; background: #eee;">
                                     <a href="{{ url('/blog/' . $related->slug) }}">
                                         @if($related->image)
-                                        <img src="{{ asset($related->image) }}" alt="{{ $related->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                        <img loading="lazy" src="{{ asset($related->image) }}" alt="{{ $related->title }}" style="width: 100%; height: 100%; object-fit: cover;">
                                         @else
-                                        <img src="{{ asset('assets/images/blog-placeholder.jpg') }}" alt="{{ $related->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                        <img loading="lazy" src="{{ asset('assets/images/blog-placeholder.jpg') }}" alt="{{ $related->title }}" style="width: 100%; height: 100%; object-fit: cover;">
                                         @endif
                                     </a>
                                 </div>
@@ -215,7 +215,7 @@
                          @php
                             $relImg = $related->image ? asset($related->image) : asset('assets/images/blog-placeholder.jpg');
                          @endphp
-                        <img src="{{ $relImg }}" alt="{{ $related->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img loading="lazy" src="{{ $relImg }}" alt="{{ $related->title }}" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div style="padding: 30px; flex-grow: 1; display: flex; flex-direction: column;">
                         <div style="display: flex; gap: 15px; margin-bottom: 15px; font-size: 12px; color: #7C8192; font-weight: 700;">
@@ -296,3 +296,4 @@
 </script>
 @endpush
 @endsection
+

@@ -813,7 +813,7 @@ header.main-header .container-fluid{
 
 .hero{
 	position: relative;
-	background: url('../images/hero-bg-image.png') no-repeat;
+	background: url('../images/hero-bg-image.webp') no-repeat;
 	background-position: top center;
 	background-size: auto;
 	padding: 260px 0 100px;
@@ -822,7 +822,7 @@ header.main-header .container-fluid{
 .hero.hero-bg-image{
 	position: relative;
 	display: block;
-	background: url('../images/hero-bg.jpg') no-repeat;
+	background: url('../images/hero-bg.webp') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	padding: 270px 0 160px;

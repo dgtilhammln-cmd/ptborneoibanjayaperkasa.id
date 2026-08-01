@@ -40,8 +40,8 @@
             <div class="row mb-60">
                 <div class="col-xl-12">
                     <div class="vl-about-thumb2">
-                        <img src="{{ asset($page->featured_image) }}" alt="{{ $page->title }}">
-                        <img src="{{ asset($page->featured_image) }}" alt="{{ $page->title }}">
+                        <img loading="lazy" src="{{ asset($page->featured_image) }}" alt="{{ $page->title }}">
+                        <img loading="lazy" src="{{ asset($page->featured_image) }}" alt="{{ $page->title }}">
                     </div>
                 </div>
             </div>
@@ -98,8 +98,8 @@
                             <div class="col-xl-6 col-lg-6 mb-30">
                                 @if(!empty($section['image']))
                                 <div class="vl-about-thumb2">
-                                    <img src="{{ asset($section['image']) }}" alt="{{ $section['title'] ?? 'Image' }}">
-                                    <img src="{{ asset($section['image']) }}" alt="{{ $section['title'] ?? 'Image' }}">
+                                    <img loading="lazy" src="{{ asset($section['image']) }}" alt="{{ $section['title'] ?? 'Image' }}">
+                                    <img loading="lazy" src="{{ asset($section['image']) }}" alt="{{ $section['title'] ?? 'Image' }}">
                                 </div>
                                 @else
                                 <div class="vl-about-thumb2" style="background: #f5f5f5; min-height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
