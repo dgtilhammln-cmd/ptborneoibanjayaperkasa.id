@@ -34,10 +34,19 @@
     
     <!-- Resource Hints for Performance -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    
-    <!-- Google Fonts - Montserrat -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Critical: font-display swap inline to prevent FOIT -->
+    <style>
+        /* Prevent invisible text during font load */
+        @font-face { font-display: swap; }
+        body { font-family: 'Montserrat', system-ui, -apple-system, sans-serif; }
+    </style>
+
+    <!-- Google Fonts - Montserrat with font-display=swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"></noscript>
     @php $gaId = \App\Models\Setting::get('seo_google_analytics'); @endphp
     @if($gaId)
@@ -86,6 +95,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/swiper-bundle.min.css') }}" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/swiper-bundle.min.css') }}"></noscript>
     
+    <!-- FontAwesome - defer completely (icons not critical above fold) -->
     <link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/all.css') }}" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/all.css') }}"></noscript>
     
@@ -137,8 +147,12 @@
     <!-- JS Loading Optimization - Defer all non-critical scripts -->
     <script defer src="{{ asset('assets/js/tracking.js') }}"></script>
 
-    <!-- Critical JS - Load first (jQuery is required by many scripts) -->
+    <!-- Critical JS - jQuery (required by many scripts) -->
     <script defer src="{{ asset('assets/js/barfi/plugins/jquery-3.7.1.min.js') }}"></script>
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="{{ asset('assets/css/barfi/plugins/bootstrap.min.css') }}" as="style">
+    <link rel="preload" href="{{ asset('assets/js/barfi/plugins/jquery-3.7.1.min.js') }}" as="script">
     
     <!-- Non-Critical JS - Load after page is interactive -->
     <script>
