@@ -1,0 +1,516 @@
+@extends('layouts.app')
+
+@section('content')
+<!-- Import Google Font Montserrat -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --dark-bg: #000000;
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --neon-mint: linear-gradient(90deg, #a1ff5a 0%, #4efdc4 100%);
+        --text-white: #ffffff;
+        --text-gray: #888888;
+    }
+
+    body {
+        background-color: var(--dark-bg);
+        font-family: 'Montserrat', sans-serif;
+        color: var(--text-white);
+    }
+
+    /* Glassmorphism Global Style */
+    .glass-morphism {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .glass-morphism:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(161, 255, 90, 0.3);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Profile Header Section */
+    .header-card {
+        padding: 20px 30px;
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .company-logo-box {
+        width: 80px;
+        height: 80px;
+        background: white;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        box-shadow: 0 0 20px rgba(161, 255, 90, 0.2);
+    }
+
+    .company-logo-box img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .badge-premium {
+        background: rgba(161, 255, 90, 0.1);
+        border: 1px solid #a1ff5a;
+        color: #a1ff5a;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .badge-expiry {
+        background: transparent;
+        border: 1px solid #4efdc4;
+        color: #4efdc4;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 8px;
+        margin-left: 10px;
+    }
+
+    /* Statistics Section */
+    .section-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .live-data-label {
+        font-size: 0.65rem;
+        background: rgba(161, 255, 90, 0.15);
+        color: #a1ff5a;
+        padding: 4px 10px;
+        border-radius: 50px;
+        border: 1px solid rgba(161, 255, 90, 0.3);
+        letter-spacing: 1px;
+    }
+
+    /* Stat Card 3D Style */
+    .stat-card {
+        padding: 30px;
+        position: relative;
+        overflow: hidden;
+        min-height: 180px;
+    }
+
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 5px;
+        line-height: 1;
+    }
+
+    .stat-label {
+        color: var(--text-gray);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .stat-icon {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 1.8rem;
+        background: var(--neon-mint);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Neon Progress Bar at bottom of card */
+    .progress-bar-neon {
+        position: absolute;
+        bottom: 25px;
+        left: 30px;
+        right: 30px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: var(--neon-mint);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(161, 255, 90, 0.5);
+        width: 0%; /* Will animate via JS or CSS */
+        transition: width 1.5s ease-in-out;
+    }
+
+    /* Table & Action Section */
+    .table-luxury {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+    .table-luxury tr {
+        background: rgba(255, 255, 255, 0.02);
+        transition: 0.3s;
+    }
+    .table-luxury td {
+        padding: 15px;
+        border: none;
+        color: var(--text-silver);
+    }
+    .table-luxury tr:hover {
+        background: rgba(161, 255, 90, 0.05);
+    }
+
+    .btn-neon-action {
+        background: var(--neon-mint);
+        color: #000 !important;
+        font-weight: 800;
+        border-radius: 12px;
+        padding: 12px 20px;
+        border: none;
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(161, 255, 90, 0.3);
+    }
+
+    .btn-neon-action:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(161, 255, 90, 0.5);
+    }
+
+    /* Animation Reveal */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* REVISI STYLE START: RINGKASAN SISTEM & SEO */
+    .pulse-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #a1ff5a;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+        box-shadow: 0 0 10px #a1ff5a;
+        animation: pulse-dot 1.5s infinite;
+    }
+    @keyframes pulse-dot {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.5); opacity: 0.5; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    .stat-mini-box {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 16px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: 0.3s;
+        border: 1px solid transparent;
+    }
+    .stat-mini-box:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--glass-border);
+    }
+    .icon-square {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: #000;
+        flex-shrink: 0;
+    }
+
+    .seo-card-luxe {
+        background: rgba(10, 10, 10, 0.4);
+        border: 1px solid rgba(161, 255, 90, 0.15);
+        position: relative;
+        overflow: hidden;
+    }
+    .rocket-bg {
+        position: absolute;
+        bottom: -20px;
+        right: -10px;
+        font-size: 180px;
+        color: rgba(161, 255, 90, 0.05);
+        transform: rotate(-15deg);
+        pointer-events: none;
+        transition: 0.5s;
+    }
+    .seo-card-luxe:hover .rocket-bg {
+        transform: rotate(0deg) scale(1.1);
+        color: rgba(161, 255, 90, 0.08);
+    }
+    .badge-seo-intel {
+        background: rgba(161, 255, 90, 0.08);
+        color: #a1ff5a;
+        border: 1px solid rgba(161, 255, 90, 0.3);
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 6px;
+        text-transform: uppercase;
+        display: inline-block;
+    }
+    /* REVISI STYLE END */
+
+    @media (max-width: 768px) {
+        .header-card { flex-direction: column; text-align: center; }
+        .stat-number { font-size: 2.2rem; }
+    }
+</style>
+
+<div class="container-fluid py-4 px-md-5">
+    
+    <!-- HEADER PROFILE -->
+    <div class="glass-morphism header-card reveal" style="animation-delay: 0.1s">
+        <div class="company-logo-box">
+            <img src="{{ asset('assets/images/PT Borneo (5).png') }}" alt="Logo PT">
+        </div>
+        <div class="header-info">
+            <h2 class="fw-bold mb-2">PT. Borneo Iban Jaya</h2>
+            <div class="d-flex flex-wrap align-items-center">
+                <span class="badge-premium">
+                    <i class="mdi mdi-shield-check"></i> HVM Digital
+                </span>
+                <span class="badge-expiry">
+                    <i class="mdi mdi-calendar-clock"></i> Aktif Sampai: 24 Desember 2026
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RINGKASAN STATISTIK TITLE -->
+    <div class="section-title reveal" style="animation-delay: 0.2s">
+        <div>
+            Ringkasan Statistik <span class="text-white-50 fw-normal ms-2" style="font-size: 0.7rem;">(Rolling 30 hari, sama sumber datanya dengan menu Analitik)</span>
+        </div>
+        <div class="live-data-label">
+            <i class="mdi mdi-circle-medium animate-pulse"></i> LIVE DATA
+        </div>
+    </div>
+
+    <div class="mb-4 reveal" style="animation-delay: 0.25s">
+        <div class="d-flex flex-column flex-md-row gap-2 align-items-start align-items-md-center justify-content-between">
+            <div class="text-white-50 small mb-0">
+                Tip: di <strong>Analitik</strong> default filter biasanya <strong>7 hari</strong>. Untuk apple-to-apple, pilih <strong>30 Hari</strong> di sana.
+            </div>
+            <a href="{{ route('admin.analytics.index', ['period' => '30d']) }}" class="btn btn-sm btn-outline-light border-0 opacity-75">
+                Buka Analitik (30 Hari)
+            </a>
+        </div>
+    </div>
+
+    <!-- STAT CARDS GRID -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3 reveal" style="animation-delay: 0.3s">
+            <div class="glass-morphism stat-card">
+                <i class="mdi mdi-account-group-outline stat-icon"></i>
+                <div class="stat-number">{{ number_format($visitorCount) }}</div>
+                <div class="stat-label">Visitor (30 hari)</div>
+                <div class="progress-bar-neon">
+                    <div class="progress-fill" style="width: {{ $visitorBar }}%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 reveal" style="animation-delay: 0.4s">
+            <div class="glass-morphism stat-card">
+                <i class="mdi mdi-phone-incoming-outline stat-icon"></i>
+                <div class="stat-number">{{ number_format($phoneLeads) }}</div>
+                <div class="stat-label">Phone Leads (30 hari)</div>
+                <div class="progress-bar-neon">
+                    <div class="progress-fill" style="width: {{ $phoneBar }}%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 reveal" style="animation-delay: 0.5s">
+            <div class="glass-morphism stat-card">
+                <i class="mdi mdi-email-outline stat-icon"></i>
+                <div class="stat-number">{{ number_format($emailLeads) }}</div>
+                <div class="stat-label">Email Leads (30 hari)</div>
+                <div class="progress-bar-neon">
+                    <div class="progress-fill" style="width: {{ $emailBar }}%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 reveal" style="animation-delay: 0.6s">
+            <div class="glass-morphism stat-card">
+                <i class="mdi mdi-whatsapp stat-icon"></i>
+                <div class="stat-number">{{ number_format($waLeads) }}</div>
+                <div class="stat-label">WA Leads (30 hari)</div>
+                <div class="progress-bar-neon">
+                    <div class="progress-fill" style="width: {{ $waBar }}%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 reveal" style="animation-delay: 0.7s">
+        <!-- Recent Blog Posts Table -->
+        <div class="col-lg-7">
+            <div class="glass-morphism p-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold m-0"><i class="mdi mdi-file-document-edit-outline me-2 text-info"></i>Konten Blog Terbaru</h5>
+                    <a href="{{ route('admin.blog.index') }}" class="btn btn-sm btn-outline-light border-0 opacity-50">Lihat Semua</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-luxury align-middle">
+                        <thead>
+                            <tr class="text-white-50 small text-uppercase">
+                                <th>Informasi Konten</th>
+                                <th>Status</th>
+                                <th class="text-end">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(\App\Models\Blog::latest()->take(4)->get() as $blog)
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        @if($blog->image)
+                                            <img src="{{ asset($blog->image) }}" class="rounded me-3" style="width: 45px; height: 45px; object-fit: cover;">
+                                        @endif
+                                        <div>
+                                            <div class="fw-bold">{{ Str::limit($blog->title, 35) }}</div>
+                                            <small class="text-white-50">{{ $blog->created_at->diffForHumans() }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge rounded-pill {{ $blog->status == 'published' ? 'bg-success' : 'bg-warning' }} bg-opacity-10 {{ $blog->status == 'published' ? 'text-success' : 'text-warning' }} border-0 px-3 py-2">
+                                        {{ ucfirst($blog->status) }}
+                                    </span>
+                                </td>
+                                <td class="text-end">
+                                    <a href="{{ route('admin.blog.edit', $blog) }}" class="btn btn-dark btn-sm rounded-circle p-2">
+                                        <i class="mdi mdi-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- REVISI START: RINGKASAN SISTEM & SEO CARD -->
+        <div class="col-lg-5">
+            <div class="row g-4">
+                <!-- REDESIGN: RINGKASAN SISTEM -->
+                <div class="col-12">
+                    <div class="glass-morphism p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h6 class="fw-bold m-0 text-white-50 small text-uppercase" style="letter-spacing: 1.5px;">Ringkasan Sistem</h6>
+                            <div class="small fw-bold text-uppercase" style="font-size: 0.6rem; color: #a1ff5a;">
+                                <span class="pulse-dot"></span> Real-time Data
+                            </div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="stat-mini-box">
+                                    <div class="icon-square shadow-lg" style="background: #a1ff5a;"><i class="mdi mdi-package-variant-closed"></i></div>
+                                    <div>
+                                        <small class="text-white-50 d-block" style="font-size: 0.65rem;">PRODUK</small>
+                                        <h4 class="fw-bold mb-0">{{ \App\Models\Product::count() }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="stat-mini-box">
+                                    <div class="icon-square shadow-lg" style="background: #4efdc4;"><i class="mdi mdi-hammer-wrench"></i></div>
+                                    <div>
+                                        <small class="text-white-50 d-block" style="font-size: 0.65rem;">LAYANAN</small>
+                                        <h4 class="fw-bold mb-0">{{ \App\Models\Service::count() }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="stat-mini-box">
+                                    <div class="icon-square shadow-lg" style="background: #70d6ff;"><i class="mdi mdi-post-outline"></i></div>
+                                    <div>
+                                        <small class="text-white-50 d-block" style="font-size: 0.65rem;">BLOG</small>
+                                        <h4 class="fw-bold mb-0">{{ \App\Models\Blog::count() }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="stat-mini-box">
+                                    <div class="icon-square shadow-lg" style="background: #d896ff;"><i class="mdi mdi-account-group-outline"></i></div>
+                                    <div>
+                                        <small class="text-white-50 d-block" style="font-size: 0.65rem;">USER</small>
+                                        <h4 class="fw-bold mb-0">{{ \App\Models\User::count() }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REDESIGN: UPGRADE SEO -->
+                <div class="col-12">
+                    <div class="glass-morphism p-4 seo-card-luxe h-100">
+                        <i class="mdi mdi-rocket-launch-outline rocket-bg"></i>
+                        <div class="position-relative z-index-2">
+                            <div class="badge-seo-intel mb-3">SEO Intelligence</div>
+                            <h3 class="fw-bold mb-2">Upgrade SEO Anda</h3>
+                            <p class="text-white-50 small mb-4" style="max-width: 90%;">Optimalkan artikel dan produk Anda agar muncul di halaman pertama mesin pencari Google secara otomatis.</p>
+                            <a href="#" class="btn-neon-action w-100 d-flex align-items-center justify-content-center">
+                                <i class="mdi mdi-lightning-bolt me-2 fs-5"></i> KELOLA SEO SEKARANG
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- REVISI END -->
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            const fills = document.querySelectorAll('.progress-fill');
+            fills.forEach(fill => {
+                const targetWidth = fill.style.width;
+                fill.style.width = '0%';
+                setTimeout(() => {
+                    fill.style.width = targetWidth;
+                }, 200);
+            });
+        }, 500);
+    });
+</script>
+
+@endsection

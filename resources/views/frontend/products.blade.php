@@ -1,0 +1,820 @@
+@extends('layouts.frontend')
+
+@push('head')
+@php
+    $breadcrumbs = [
+        ['name' => 'Home', 'url' => url('/')],
+        ['name' => 'Produk Kami', 'url' => url('/products')]
+    ];
+@endphp
+@include('partials.schema', ['schemaType' => 'breadcrumb', 'breadcrumbs' => $breadcrumbs])
+@include('partials.schema', ['schemaType' => 'organization'])
+@if(isset($products) && $products->count() > 0)
+@include('partials.schema', ['schemaType' => 'productlist', 'products' => $products])
+@endif
+@endpush
+
+@section('content')
+
+    @php
+        /** @var \App\Models\Page|null $pageModel */
+        $pageModel = (isset($page) && $page instanceof \App\Models\Page) ? $page : null;
+    @endphp
+
+    <!--================= Breadcrumb section start =================-->
+    @php
+        $breadcrumb = $pageModel
+            ? $pageModel->getSection('breadcrumb', ['title' => 'Produk Kami', 'background_image' => 'assets/img/barfi/shape/breadcrumb-shape.svg'])
+            : ['title' => 'Produk Kami', 'background_image' => 'assets/img/barfi/shape/breadcrumb-shape.svg'];
+    @endphp
+    @if(!$pageModel || $pageModel->isSectionActive('breadcrumb'))
+    <section class="vl-breadcrumb-bg" style="background-image: url({{ asset($breadcrumb['background_image'] ?? 'assets/img/barfi/shape/breadcrumb-shape.svg') }});">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-6 mx-auto text-center mb-30">
+                    <div class="vl-breadcrumb-content">
+                        <h2 class="title pb-20">{{ $breadcrumb['title'] ?? 'Produk Kami' }}</h2>
+                        <ul>
+                            <li><a href="{{ url('/') }}">Home </a></li>
+                            <li><i class="fa-light fa-angle-right"></i></li>
+                            <li><a class="active" href="#">Produk Kami</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+    <!--================= Breadcrumb section End =================-->
+    
+    <!--================= Products Intro section start =================-->
+    @php
+        $introSection = $pageModel ? $pageModel->getSection('intro_section', []) : [];
+    @endphp
+    @if(!$pageModel || $pageModel->isSectionActive('intro_section'))
+    <section class="vl-about vkl-gray-bg-1 fix pt-100 pb-70">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-6 mb-30">
+                    <div class="vl-about-content2">
+                        <!-- section title start -->
+                        <div class="vl-section-title mb-60">
+                            <h4 class="subtitle">
+                                <span><img class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                                {{ $introSection['subtitle'] ?? 'Produk Kami' }}
+                            </h4>
+                            <h2 class="title text-effect">
+                                {{ $introSection['heading'] ?? 'Sparepart & Aksesori Industri Berkualitas Tinggi' }}
+                            </h2>
+                            <p class="para pt-16">
+                                {{ $introSection['description_1'] ?? 'PT. Borneo Iban Jaya Perkasa memproduksi berbagai macam sparepart dan aksesori industri dengan standar kualitas tinggi. Produk kami meliputi komponen otomotif, bracket & mounting, suku cadang mesin, dan aksesori industri lainnya yang dirancang untuk memenuhi kebutuhan spesifik pelanggan.' }}
+                            </p>
+                            <p class="para pt-16">
+                                {{ $introSection['description_2'] ?? 'Dengan teknologi modern dan pengalaman lebih dari 22 tahun, setiap produk yang kami hasilkan menjamin presisi tinggi, ketahanan yang baik, dan kualitas konsisten untuk mendukung operasional industri Anda.' }}
+                            </p>
+                        </div> <!-- section title End -->
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 mb-30">
+                    <div class="vl-about-thumb2">
+                        <img src="{{ asset($introSection['image'] ?? 'assets/img/barfi/SnowRemovalTwo/about/vl-about2.1.png') }}" alt="PT. Borneo Iban Jaya Perkasa - Produk Sparepart">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+    <!--================= Products Intro section End =================-->
+
+    <!--================= Products section start =================-->
+    <section id="products" class="vl-service-iner vkl-gray-bg-1 fix pt-100 pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 mb-60">
+                    <div class="vl-section-title text-center">
+                        <h4 class="subtitle"> <span><img class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.1.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> Katalog Produk</h4>
+                        <h2 class="title">Berbagai Produk Sparepart & Aksesoris untuk Kebutuhan Industri</h2>
+                        <p class="para pt-16">Kami menyediakan berbagai macam produk sparepart dan aksesori industri dengan kualitas terjamin dan harga kompetitif.</p>
+                    </div>
+                </div>
+            </div>
+
+<!--================= Modern Product Search Start =================-->
+<div class="row mb-50">
+    <div class="col-xl-8 mx-auto">
+        <div style="background: #fff; padding: 10px; border-radius: 100px; box-shadow: 0 10px 40px rgba(15, 36, 83, 0.08); border: 1px solid #f1f1f1;">
+            <div class="input-group align-items-center">
+                <!-- Icon Kaca Pembesar (Biru Tua) -->
+                <span class="input-group-text bg-transparent border-0 ps-4">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #0F2453; font-size: 18px;"></i>
+                </span>
+                
+                <!-- Input Pencarian -->
+                <input 
+                    type="text" 
+                    id="productSearch" 
+                    class="form-control border-0 shadow-none bg-transparent" 
+                    placeholder="Cari sparepart atau komponen presisi..."
+                    style="padding: 15px 10px; font-size: 16px; color: #0F2453; font-weight: 500;">
+
+                <!-- Tombol Reset (Subtle) -->
+                <button 
+                    type="button" 
+                    id="productSearchClear" 
+                    class="btn border-0 text-muted px-4" 
+                    style="font-size: 14px; font-weight: 600; transition: 0.3s; display: none;">
+                    Reset
+                </button>
+
+                <!-- Tombol Cari (Modern Action) -->
+                <div class="pe-2">
+                    <button 
+                        type="button" 
+                        style="background: #0F2453; color: #fff; border: none; padding: 12px 30px; border-radius: 100px; font-weight: 700; font-size: 14px; transition: 0.3s; box-shadow: 0 4px 12px rgba(15, 36, 83, 0.2);">
+                        Cari
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Metadata Ringkas di bawah Search -->
+        <div class="text-center mt-3">
+            <p style="font-size: 13px; color: #7C8192; margin: 0;">
+                <i class="fa-solid fa-circle-info me-1" style="color: #1E3A8A;"></i> 
+                Menampilkan seluruh katalog komponen manufaktur presisi
+            </p>
+        </div>
+    </div>
+</div>
+<!--================= Modern Product Search End =================-->
+
+@push('js')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('productSearch');
+        const clearBtn = document.getElementById('productSearchClear');
+
+        // Logic menampilkan/menyembunyikan tombol Reset
+        searchInput.addEventListener('input', function() {
+            if (this.value.length > 0) {
+                clearBtn.style.display = 'block';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+        });
+
+        // Logic Reset
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            this.style.display = 'none';
+            searchInput.focus();
+            // Trigger function search Anda disini jika perlu
+            // e.g., filterProducts(''); 
+        });
+    });
+</script>
+@endpush
+            
+            <div class="row" id="productsContainer">
+                @if(isset($products) && $products->count() > 0)
+@foreach($products as $product)
+<div class="col-xl-4 col-md-6 col-6 mb-30 product-item" data-category="{{ $product->category ?? 'all' }}">
+    <!-- Single Product Card -->
+    <div style="background: #fff; border-radius: 20px; padding: 15px; border: 1px solid #f1f1f1; box-shadow: 0 10px 30px rgba(15, 36, 83, 0.03); height: 100%; display: flex; flex-direction: column; transition: all 0.3s ease-in-out; position: relative; overflow: hidden;">
+        
+        <!-- 1. Thumbnail (1:1 Aspect Ratio) -->
+        <div style="width: 100%; aspect-ratio: 1/1; background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; border: 1px solid #f8fafc;">
+            @php
+                $imgUrl = $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset($product->image)) : asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png");
+            @endphp
+            <img src="{{ $imgUrl }}" alt="{{ $product->name }}" style="width: 90%; height: 90%; object-fit: contain; transition: transform 0.4s;">
+        </div>
+
+        <!-- 2. Content Box -->
+        <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <!-- Kategori Kecil (Label) -->
+                <span style="display: block; font-size: 9px; font-weight: 800; color: #1E3A8A; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">
+                    {{ str_replace('-', ' ', $product->category ?? 'Sparepart') }}
+                </span>
+                
+                <!-- Judul Produk -->
+                <h3 style="font-size: clamp(14px, 4vw, 18px); font-weight: 800; line-height: 1.3; margin-bottom: 12px;">
+                    <a href="{{ route('product.show', $product->slug) }}" style="color: #0F2453; text-decoration: none; transition: 0.3s;">
+                        {{ Str::limit($product->name, 45) }}
+                    </a>
+                </h3>
+            </div>
+
+            <!-- 3. Action Link (Responsive Detail) -->
+            <div style="border-top: 1px solid #f1f1f1; padding-top: 12px; margin-top: 5px;">
+                <a href="{{ route('product.show', $product->slug) }}" style="color: #1E3A8A; font-weight: 700; text-decoration: none; font-size: 13px; display: flex; align-items: center; justify-content: space-between; transition: 0.3s;">
+                    <span class="d-none d-sm-inline">Lihat Detail</span>
+                    <span class="d-inline d-sm-none">Detail</span>
+                    <span style="width: 24px; height: 24px; background: #eef2ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px;">
+                        <i class="fa-regular fa-arrow-right"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div> 
+</div>
+@endforeach
+                @else
+                    <!-- Default Products (Hardcoded) -->
+                    <!-- Komponen Otomotif -->
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="automotive">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Motor">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Motor">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Suku Cadang Motor</a></h3>
+                                <p class="para">Berbagai suku cadang motor berkualitas tinggi untuk perawatan dan perbaikan kendaraan bermotor Anda dengan presisi tinggi.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="automotive">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin Mobil">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin Mobil">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Komponen Mesin Mobil</a></h3>
+                                <p class="para">Sparepart dan komponen mesin mobil dengan kualitas terjamin. Cocok untuk berbagai jenis kendaraan dengan presisi tinggi.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="automotive">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Aksesori Kendaraan">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Aksesori Kendaraan">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Aksesori Kendaraan</a></h3>
+                                <p class="para">Aksesori kendaraan dengan desain fungsional dan tahan lama untuk meningkatkan performa dan estetika kendaraan Anda.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bracket & Mounting -->
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="bracket">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Bracket Baja">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Bracket Baja">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Bracket Baja</a></h3>
+                                <p class="para">Bracket baja dengan kekuatan tinggi untuk berbagai aplikasi mounting industri. Didesain untuk beban berat dan kondisi ekstrem.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="bracket">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Mounting System">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Mounting System">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Mounting System</a></h3>
+                                <p class="para">Sistem mounting yang kuat dan tahan lama untuk berbagai peralatan industri. Dapat disesuaikan dengan kebutuhan spesifik Anda.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="bracket">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Bracket Custom">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Bracket Custom">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Bracket Custom</a></h3>
+                                <p class="para">Bracket custom sesuai spesifikasi Anda. Kami melayani pembuatan bracket dengan ukuran dan bentuk sesuai kebutuhan proyek.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Suku Cadang -->
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="sparepart">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Mesin Industri">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Suku Cadang Mesin Industri">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Suku Cadang Mesin Industri</a></h3>
+                                <p class="para">Suku cadang mesin industri dengan kualitas terjamin. Dapat disesuaikan dengan spesifikasi mesin Anda untuk performa optimal.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="sparepart">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin CNC">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Komponen Mesin CNC">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Komponen Mesin CNC</a></h3>
+                                <p class="para">Komponen dan sparepart untuk mesin CNC dengan presisi tinggi. Cocok untuk berbagai jenis mesin CNC dengan kualitas terjamin.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="sparepart">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Sparepart Mesin Bubut">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Sparepart Mesin Bubut">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Sparepart Mesin Bubut</a></h3>
+                                <p class="para">Suku cadang untuk mesin bubut dengan kualitas tinggi. Didesain untuk ketahanan dan performa optimal dalam operasional produksi.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aksesori Industri -->
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="accessory">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="T-Handle Tojok">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="T-Handle Tojok">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">T-Handle Tojok</a></h3>
+                                <p class="para">T-Handle Tojok berkualitas tinggi untuk berbagai aplikasi industri dan otomotif dengan desain ergonomis dan tahan lama.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="accessory">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Aksesori Mesin">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Aksesori Mesin">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Aksesori Mesin</a></h3>
+                                <p class="para">Berbagai aksesori mesin dengan desain fungsional untuk meningkatkan efisiensi dan produktivitas operasional pabrik Anda.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="accessory">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Komponen Industri">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Komponen Industri">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Komponen Industri</a></h3>
+                                <p class="para">Suku cadang dan komponen untuk berbagai aplikasi industri dengan kualitas tinggi dan sesuai standar industri.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom Parts -->
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="custom">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Custom Machining Parts">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.1.png") }}" alt="Custom Machining Parts">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Custom Machining Parts</a></h3>
+                                <p class="para">Komponen custom sesuai spesifikasi Anda. Kami melayani pembuatan komponen dengan presisi tinggi sesuai kebutuhan khusus proyek Anda.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="custom">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Custom Bubut Parts">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.2.png") }}" alt="Custom Bubut Parts">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Custom Bubut Parts</a></h3>
+                                <p class="para">Komponen hasil bubut custom dengan presisi tinggi sesuai spesifikasi Anda. Cocok untuk kebutuhan khusus yang memerlukan akurasi tinggi.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="custom">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Custom Stamping Parts">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.3.png") }}" alt="Custom Stamping Parts">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Custom Stamping Parts</a></h3>
+                                <p class="para">Komponen hasil stamping custom dengan bentuk dan ukuran sesuai kebutuhan Anda. Dapat diproduksi dalam berbagai material.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Moulding Parts -->
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="moulding">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Moulding & Injection Parts">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.4.png") }}" alt="Moulding & Injection Parts">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Moulding & Injection Parts</a></h3>
+                                <p class="para">Produk moulding dan injection dengan kualitas tinggi. Cocok untuk berbagai aplikasi industri dengan bentuk dan ukuran yang dapat disesuaikan.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="moulding">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Plastic Moulding">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.5.png") }}" alt="Plastic Moulding">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Plastic Moulding</a></h3>
+                                <p class="para">Produk plastic moulding dengan kualitas tinggi untuk berbagai aplikasi. Dapat diproduksi dalam berbagai bentuk dan ukuran sesuai kebutuhan.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-30 product-item" data-category="moulding">
+                        <div class="vl-solution-box-wrap2">
+                            <div class="vl-thumb">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Injection Moulding">
+                                <img src="{{ asset("assets/img/barfi/SnowRemovalTwo/solution/solution-thumb2.6.png") }}" alt="Injection Moulding">
+                            </div>
+                            <div class="vl-content">
+                                <h3 class="title"><a href="{{ url("/products") }}">Injection Moulding</a></h3>
+                                <p class="para">Produk injection moulding dengan presisi tinggi untuk berbagai kebutuhan industri. Cocok untuk produksi massal dengan kualitas konsisten.</p>
+                                <p class="para mt-2 mb-2"><strong>Harga: Hubungi Kami</strong></p>
+                                <a href="{{ url("/products") }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            @if(isset($products) && $products->hasPages())
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="vl-theme-pagination text-center mt-18 mb-30">
+                        <ul>
+                            @if($products->onFirstPage())
+                                <li><a href="#"><i class="fa-regular fa-angle-left"></i></a></li>
+                            @else
+                                <li><a href="{{ $products->previousPageUrl() }}"><i class="fa-regular fa-angle-left"></i></a></li>
+                            @endif
+
+                            @foreach($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                                @if($page == $products->currentPage())
+                                    <li><a href="#" class="active">{{ $page }}</a></li>
+                                @else
+                                    <li><a href="{{ $url }}">{{ $page }}</a></li>
+                                @endif
+                            @endforeach
+
+                            @if($products->hasMorePages())
+                                <li><a href="{{ $products->nextPageUrl() }}"><i class="fa-regular fa-angle-right"></i></a></li>
+                            @else
+                                <li><a href="#"><i class="fa-regular fa-angle-right"></i></a></li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @endif
+        </div>
+    </section>
+    <!--================= Products section End =================-->
+
+    <!--================= Product Categories section Start =================-->
+    @php
+        $categoriesSection = $pageModel ? $pageModel->getSection('categories_section', []) : [];
+    @endphp
+    @if(!$pageModel || $pageModel->isSectionActive('categories_section'))
+    @php
+        $catSubtitle = $categoriesSection['subtitle'] ?? 'Kategori Produk';
+        $catHeading  = $categoriesSection['heading']  ?? 'Berbagai Kategori Produk untuk Kebutuhan Industri Anda';
+        $catDesc     = $categoriesSection['description'] ?? 'Kami menyediakan produk dalam berbagai kategori untuk memenuhi kebutuhan industri yang beragam, dari komponen otomotif hingga aksesori industri.';
+        $catItems    = $categoriesSection['categories'] ?? [
+            ['icon' => 'assets/img/barfi/icon/vl-chos-icon-ab-1.1.svg', 'title' => 'Komponen Otomotif', 'description' => 'Sparepart dan komponen otomotif dengan presisi tinggi untuk berbagai jenis kendaraan, dari sepeda motor hingga kendaraan berat.'],
+            ['icon' => 'assets/img/barfi/icon/vl-chos-icon-ab-1.2.svg', 'title' => 'Bracket & Mounting', 'description' => 'Sistem bracket dan mounting yang kuat dan tahan lama untuk berbagai aplikasi industri, dirancang untuk beban berat dan kondisi ekstrem.'],
+            ['icon' => 'assets/img/barfi/icon/vl-chos-icon-ab-1.3.svg', 'title' => 'Suku Cadang Mesin', 'description' => 'Suku cadang mesin industri dengan kualitas terjamin, dapat disesuaikan dengan spesifikasi mesin Anda untuk performa optimal.'],
+            ['icon' => 'assets/img/barfi/icon/vl-chos-icon-ab-1.4.svg', 'title' => 'Aksesori Industri', 'description' => 'Berbagai aksesori industri dengan desain fungsional untuk meningkatkan efisiensi dan produktivitas operasional pabrik Anda.'],
+            ['icon' => 'assets/img/barfi/icon/vl-chos-icon-ab-1.5.svg', 'title' => 'Custom Parts', 'description' => 'Komponen custom sesuai spesifikasi Anda. Kami melayani pembuatan komponen dengan presisi tinggi untuk kebutuhan khusus.'],
+            ['icon' => 'assets/img/barfi/icon/vl-chos-icon-ab-1.6.svg', 'title' => 'Moulding Parts', 'description' => 'Produk moulding dan injection dengan kualitas tinggi untuk berbagai aplikasi industri dengan bentuk dan ukuran yang fleksibel.'],
+        ];
+    @endphp
+    <section class="vl-choose-about vkl-gray-bg-1 fix pt-100 pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 mb-60">
+                    <div class="vl-section-title text-center">
+                        <h4 class="subtitle">
+                            <span><img class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                            {{ $catSubtitle }}
+                        </h4>
+                        <h2 class="title">{{ $catHeading }}</h2>
+                        <p class="para pt-16">{{ $catDesc }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach($catItems as $cat)
+                <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="vl-about-iconbox3 vl-about-iconbox3-inner">
+                        <div class="icon">
+                            <span><img class="animate__animated animate__shakeX" src="{{ asset($cat['icon'] ?? '') }}" alt="{{ $cat['title'] ?? '' }}"></span>
+                        </div>
+                        <div class="content">
+                            <h4 class="title">{{ $cat['title'] ?? '' }}</h4>
+                            <p class="para pt-10">{{ $cat['description'] ?? '' }}</p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+    <!--================= Product Categories section End =================-->
+    
+    <!--================= Why Choose Our Products section Start =================-->
+    @php
+        $whyChooseSection = $pageModel ? $pageModel->getSection('why_choose_section', []) : [];
+    @endphp
+    @if(!$pageModel || $pageModel->isSectionActive('why_choose_section'))
+    @php
+        $whySubtitle = $whyChooseSection['subtitle'] ?? 'Mengapa Memilih Produk Kami';
+        $whyHeading  = $whyChooseSection['heading']  ?? 'Keunggulan Produk yang Membuat Kami Dipercaya';
+        $whyDesc     = $whyChooseSection['description'] ?? 'Setiap produk yang kami hasilkan melalui proses quality control ketat untuk memastikan kualitas terbaik dan sesuai dengan standar industri.';
+        $whyBg       = $whyChooseSection['background_image'] ?? 'assets/img/barfi/shape/fact-shape-about-bg.svg';
+        $whyFeatures = $whyChooseSection['features'] ?? [
+            ['icon' => 'fa-check-circle',   'title' => 'Kualitas Terjamin',       'description' => 'Setiap produk melalui quality control ketat untuk memastikan kualitas sesuai standar industri dan spesifikasi yang diminta.'],
+            ['icon' => 'fa-ruler-combined', 'title' => 'Presisi Tinggi',          'description' => 'Produk dibuat dengan teknologi modern dan presisi tinggi untuk memastikan akurasi dimensi dan kualitas konsisten.'],
+            ['icon' => 'fa-tools',          'title' => 'Custom Sesuai Kebutuhan', 'description' => 'Kami melayani pembuatan produk custom sesuai spesifikasi Anda dengan fleksibilitas tinggi untuk berbagai kebutuhan.'],
+            ['icon' => 'fa-clock',          'title' => 'Tepat Waktu',             'description' => 'Komitmen kami untuk menyelesaikan setiap pesanan tepat waktu tanpa mengorbankan kualitas produk yang dihasilkan.'],
+        ];
+    @endphp
+    <section class="vl-about-fact bg-cmon fix pt-100 pb-100" style="background-image: url({{ asset($whyBg) }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 mx-auto text-center">
+                    <div class="vl-section-title mb-60">
+                        <h4 class="subtitle">
+                            <span><img class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                            {{ $whySubtitle }}
+                        </h4>
+                        <h2 class="title">{{ $whyHeading }}</h2>
+                        <p class="para pt-16">{{ $whyDesc }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach($whyFeatures as $feature)
+                <div class="col-xl-3 col-md-6 mb-30">
+                    <div class="vl-work-box3 vl-work-box3-inner text-center">
+                        <div class="icon mb-20">
+                            <i class="fa-solid {{ $feature['icon'] ?? 'fa-check-circle' }}" style="font-size: 48px; color: #25D366;"></i>
+                        </div>
+                        <div class="vl-content">
+                            <h3 class="title title-2">{{ $feature['title'] ?? '' }}</h3>
+                            <p class="para para-2">{{ $feature['description'] ?? '' }}</p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+    <!--================= Why Choose Our Products section End =================-->
+    
+    <!--================= Product Quality section Start =================-->
+    @php
+        $qualitySection = $pageModel ? $pageModel->getSection('quality_section', []) : [];
+    @endphp
+    @if(!$pageModel || $pageModel->isSectionActive('quality_section'))
+    @php
+        $qSubtitle = $qualitySection['subtitle']      ?? 'Standar Kualitas';
+        $qHeading  = $qualitySection['heading']       ?? 'Komitmen Kami terhadap Kualitas Produk';
+        $qDesc1    = $qualitySection['description_1'] ?? 'Setiap produk yang kami hasilkan menjalani proses quality control yang ketat di setiap tahap produksi. Kami menggunakan material berkualitas tinggi dan teknologi modern untuk memastikan produk yang dihasilkan memiliki presisi tinggi, ketahanan yang baik, dan sesuai dengan standar industri.';
+        $qDesc2    = $qualitySection['description_2'] ?? 'Dengan pengalaman lebih dari 22 tahun, kami memahami pentingnya kualitas dalam mendukung operasional industri. Setiap produk yang keluar dari workshop kami dijamin kualitasnya dan siap digunakan untuk kebutuhan industri Anda.';
+        $qImage    = $qualitySection['image']         ?? 'assets/img/barfi/SnowRemovalOne/service/vl-value-thumb1.1.png';
+        $qBoxes    = $qualitySection['quality_boxes'] ?? [
+            ['title' => 'Material Berkualitas',   'description' => 'Kami menggunakan material berkualitas tinggi yang telah teruji untuk memastikan produk memiliki ketahanan dan performa optimal.'],
+            ['title' => 'Quality Control Ketat',  'description' => 'Setiap produk melalui proses inspeksi kualitas di setiap tahap produksi untuk memastikan sesuai dengan spesifikasi dan standar yang ditetapkan.'],
+            ['title' => 'Garansi Kualitas',       'description' => 'Kami memberikan garansi kualitas untuk setiap produk yang kami hasilkan sebagai bentuk komitmen kami terhadap kepuasan pelanggan.'],
+        ];
+    @endphp
+    <section class="vl-value-area vkl-gray-bg-1 pt-100 pb-70">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-6 mb-30">
+                    <div class="vl-value-content-wrap">
+                        <div class="vl-section-title mb-60">
+                            <h4 class="subtitle">
+                                <span><img class="circle" src="{{ asset('assets/img/barfi/icon/sub-title-icon1.1.svg') }}" alt="PT. Borneo Iban Jaya Perkasa"></span>
+                                {{ $qSubtitle }}
+                            </h4>
+                            <h2 class="title">{{ $qHeading }}</h2>
+                            <p class="para pt-16">{{ $qDesc1 }}</p>
+                            <p class="para pt-16">{{ $qDesc2 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 mb-30">
+                    <div class="vl-valu-thumb">
+                        <img src="{{ asset($qImage) }}" alt="PT. Borneo Iban Jaya Perkasa - Quality Control">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-60">
+                @foreach($qBoxes as $box)
+                <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="vl-single-value-box">
+                        <h3 class="title">{{ $box['title'] ?? '' }}</h3>
+                        <p class="para">{{ $box['description'] ?? '' }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+    <!--================= Product Quality section End =================-->
+
+    @include('partials.cta')
+    
+    <!-- progress -->
+    <div class="paginacontainer">
+        <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+        </svg>
+        </div>
+    </div> 
+
+@push('js')
+<script>
+(function() {
+    'use strict';
+    
+    function initProductFilter() {
+        const filterButtons = document.querySelectorAll('.product-filter-btn');
+        const productItems = document.querySelectorAll('.product-item');
+        const productsContainer = document.getElementById('productsContainer');
+        const searchInput = document.getElementById('productSearch');
+        const searchClearBtn = document.getElementById('productSearchClear');
+        
+        if (!productsContainer || productItems.length === 0) {
+            return;
+        }
+
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        function applyFilter() {
+            // Remove existing no-results message
+            const existingMessage = document.getElementById('no-products-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            let visibleCount = 0;
+            const searchTerm = currentSearch.trim().toLowerCase();
+
+            productItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category') || 'all';
+                const titleEl = item.querySelector('.title');
+                const descEl = item.querySelector('.para');
+                const titleText = (titleEl ? titleEl.innerText : '').toLowerCase();
+                const descText = (descEl ? descEl.innerText : '').toLowerCase();
+
+                const matchCategory = (currentFilter === 'all' || itemCategory === currentFilter);
+                const matchSearch = !searchTerm ||
+                    titleText.includes(searchTerm) ||
+                    descText.includes(searchTerm);
+
+                if (matchCategory && matchSearch) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                    // fade in
+                    item.style.opacity = '0';
+                    setTimeout(() => {
+                        item.style.transition = 'opacity 0.3s ease';
+                        item.style.opacity = '1';
+                    }, 10);
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Show message if no products found
+            if (visibleCount === 0 && productsContainer) {
+                const message = document.createElement('div');
+                message.id = 'no-products-message';
+                message.className = 'col-12 text-center py-5';
+                message.innerHTML = '<p class="text-muted" style="font-size: 18px;">Produk tidak ditemukan dengan filter/pencarian saat ini.</p>';
+                productsContainer.appendChild(message);
+            }
+        }
+
+        // Category filter buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                currentFilter = this.getAttribute('data-filter') || 'all';
+
+                // Update active button state
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.style.background = 'transparent';
+                    btn.style.color = '#25D366';
+                });
+                this.classList.add('active');
+                this.style.background = '#25D366';
+                this.style.color = 'white';
+
+                applyFilter();
+            });
+        });
+
+        // Text search
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                currentSearch = this.value;
+                applyFilter();
+            });
+        }
+
+        // Reset button
+        if (searchClearBtn && searchInput) {
+            searchClearBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                currentSearch = '';
+                applyFilter();
+            });
+        }
+
+        // Initial apply
+        applyFilter();
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initProductFilter);
+    } else {
+        initProductFilter();
+    }
+})();
+</script>
+@endpush
+
+@endsection
+

@@ -1,0 +1,72 @@
+<x-guest-layout>
+    <div class="ag-login-card ag-glass">
+        <div class="text-center mb-5">
+            <h2 class="text-white fw-bold mb-0">BORNEO<span class="text-primary">JAYA</span></h2>
+            <p class="text-muted small">Premium Management Suite</p>
+        </div>
+
+        <h4 class="text-white fw-bold mb-4">Welcome Back</h4>
+
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <!-- Email Address -->
+            <div class="mb-4">
+                <label for="email" class="form-label small text-muted">Email Address</label>
+                <div class="input-group ag-glass overflow-hidden shadow-none"
+                    style="border-radius: 12px; border-color: rgba(255,255,255,0.1);">
+                    <span class="input-group-text bg-transparent border-0 text-primary">
+                        <i class="mdi mdi-email-outline"></i>
+                    </span>
+                    <input type="email" id="email" name="email" value="{{ old('email') }}"
+                        class="form-control bg-transparent border-0 text-white" placeholder="name@example.com" required
+                        autofocus>
+                </div>
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label for="password" class="form-label small text-muted">Password</label>
+                    @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}"
+                            class="text-primary small text-decoration-none">Forgot?</a>
+                    @endif
+                </div>
+                <div class="input-group ag-glass overflow-hidden shadow-none"
+                    style="border-radius: 12px; border-color: rgba(255,255,255,0.1);">
+                    <span class="input-group-text bg-transparent border-0 text-primary">
+                        <i class="mdi mdi-lock-outline"></i>
+                    </span>
+                    <input type="password" id="password" name="password"
+                        class="form-control bg-transparent border-0 text-white" placeholder="••••••••" required
+                        autocomplete="current-password">
+                </div>
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
+
+            <!-- Remember Me -->
+            <div class="form-check mb-4">
+                <input class="form-check-input bg-dark border-secondary" type="checkbox" id="remember_me"
+                    name="remember">
+                <label class="form-check-label text-muted small" for="remember_me">
+                    Keep me signed in
+                </label>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary py-3 fw-bold">
+                    Sign In to Dashboard
+                </button>
+            </div>
+        </form>
+
+        <div class="text-center mt-5">
+            <p class="text-muted small">© 2025 Borneo Jaya. All rights reserved.</p>
+        </div>
+    </div>
+</x-guest-layout>

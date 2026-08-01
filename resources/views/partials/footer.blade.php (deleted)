@@ -1,0 +1,160 @@
+<!--================= Footer section start =================-->
+@php
+    $footerBgColor = \App\Models\Setting::get('footer_background_color', '#1a1a1a');
+    $footerTextColor = \App\Models\Setting::get('footer_text_color', '#ffffff');
+@endphp
+<footer class="vl-footer vl-footer-5 vkl-gray-bg-7 fix pt-100" style="background-color: {{ $footerBgColor }} !important; background-image: none !important; color: {{ $footerTextColor }};">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-30">
+                <!-- footer widget 1 -->
+                <div class="vl-footer-widget-1" id="widget1">
+                    <div class="vl-footer-logo">
+                        @php
+                            $logo = \App\Models\Setting::get('site_logo');
+                            $siteName = \App\Models\Setting::get('site_name');
+                        @endphp
+                        <a href="{{ url('/') }}">
+                            @if($logo)
+                                <img style="max-width: 300px;" src="{{ asset($logo) }}" alt="{{ $siteName }}">
+                            @else
+                                <img style="max-width: 300px;" src="{{ asset('assets/img/barfi/logo/logo-black.png') }}" alt="{{ $siteName }}">
+                            @endif
+                        </a>
+                    </div>
+                    <div class="vl-footer-content">
+                        <p class="para para-4 pt-16 pb-24" style="color: {{ $footerTextColor }};">{{ \App\Models\Setting::get('site_description', 'PT. Borneo Iban Jaya Perkasa adalah perusahaan yang bergerak di bidang jasa logam, plong, dan produksi aksesori serta suku cadang berkualitas tinggi. Kami melayani berbagai kebutuhan industri dan otomotif dengan kualitas terjamin.') }}</p>
+                    </div>
+                    <div class="social-area social-area-footer social-area-footer-5">
+                        @php
+                            $socialLinks = \App\Models\Setting::get('social_links', []);
+                            if (is_string($socialLinks)) {
+                                $socialLinks = json_decode($socialLinks, true) ?: [];
+                            }
+                            // Fallback to old format if new format is empty
+                            if (empty($socialLinks)) {
+                                if (\App\Models\Setting::get('social_facebook')) {
+                                    $socialLinks[] = ['label' => 'Facebook', 'url' => \App\Models\Setting::get('social_facebook'), 'icon' => 'fa-brands fa-facebook-f'];
+                                }
+                                if (\App\Models\Setting::get('social_instagram')) {
+                                    $socialLinks[] = ['label' => 'Instagram', 'url' => \App\Models\Setting::get('social_instagram'), 'icon' => 'fa-brands fa-instagram'];
+                                }
+                                if (\App\Models\Setting::get('social_linkedin')) {
+                                    $socialLinks[] = ['label' => 'LinkedIn', 'url' => \App\Models\Setting::get('social_linkedin'), 'icon' => 'fa-brands fa-linkedin-in'];
+                                }
+                                if (\App\Models\Setting::get('social_twitter')) {
+                                    $socialLinks[] = ['label' => 'Twitter/X', 'url' => \App\Models\Setting::get('social_twitter'), 'icon' => 'fa-brands fa-x-twitter'];
+                                }
+                            }
+                        @endphp
+                        @foreach($socialLinks as $link)
+                            @if(!empty($link['url']))
+                            <a href="{{ $link['url'] }}" target="_blank" rel="noopener noreferrer" title="{{ $link['label'] ?? '' }}">
+                                <i class="{{ $link['icon'] ?? 'fa-brands fa-link' }}"></i>
+                            </a>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-30">
+                <div class="vl-footer-widget-2">
+                    <h3 class="vl-footer-widget-title vl-footer-widget-title-4 mb-30" style="color: {{ $footerTextColor }};">Quick Links</h3>
+                    <div class="vl-footer-menu vl-footer-menu-4">
+                        <ul>
+                            <li><a href="{{ url('/') }}" style="color: {{ $footerTextColor }};">Home</a></li>
+                            <li><a href="{{ url('/about') }}" style="color: {{ $footerTextColor }};">About Us</a></li>
+                            <li><a href="{{ url('/services') }}" style="color: {{ $footerTextColor }};">Services</a></li>
+                            <li><a href="{{ url('/blog') }}" style="color: {{ $footerTextColor }};">Blog</a></li>
+                            <li><a href="{{ url('/contact') }}" style="color: {{ $footerTextColor }};">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-30">
+                <!-- footer widget 4 -->
+                <div class="vl-footer-widget-3">
+                    <h3 class="vl-footer-widget-title vl-footer-widget-title-4 mb-30" style="color: {{ $footerTextColor }};">Contact Us</h3>
+                    <!-- icon list -->
+                    <div class="vl-icon-list vl-icon-list-4">
+                        @php
+                            $contactPhone = \App\Models\Setting::get('contact_phone', '1234567890');
+                            $whatsappLink = formatWhatsApp($contactPhone);
+                        @endphp
+                        <ul>
+                            <li><a href="{{ $whatsappLink }}" target="_blank" style="color: {{ $footerTextColor }};"><span class="mr-8"><i class="fa-brands fa-whatsapp" style="color: {{ $footerTextColor }}; font-size: 18px;"></i></span>{{ $contactPhone }}</a></li>
+                            <li><a href="#" style="color: {{ $footerTextColor }};"><span class="mr-8"><i class="fa-solid fa-location-dot" style="color: {{ $footerTextColor }}; font-size: 18px;"></i></span>{{ \App\Models\Setting::get('contact_address', '421 Allen, Mexico 4233') }}</a></li>
+                            <li><a href="mailto:{{ \App\Models\Setting::get('contact_email', 'Barfi@gmail.com') }}" style="color: {{ $footerTextColor }};"><span class="mr-8"><i class="fa-solid fa-envelope" style="color: {{ $footerTextColor }}; font-size: 18px;"></i></span>{{ \App\Models\Setting::get('contact_email', 'Barfi@gmail.com') }}</a></li>
+                            @php
+                                $siteUrl = \App\Models\Setting::get('site_url', '');
+                            @endphp
+                            @if($siteUrl)
+                            <li><a href="{{ $siteUrl }}" target="_blank" style="color: {{ $footerTextColor }};"><span class="mr-8"><i class="fa-solid fa-globe" style="color: {{ $footerTextColor }}; font-size: 18px;"></i></span>{{ $siteUrl }}</a></li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-30">
+                <!-- footer widget 4 -->
+                <div class="vl-footer-widget-45">
+                    <h3 class="vl-footer-widget-title vl-footer-widget-title-4 mb-30" style="color: {{ $footerTextColor }};">Working Hours</h3>
+                    <!-- working hour -->
+                    <div class="vl-working-main-wrap">
+                        <ul style="color: {{ $footerTextColor }};">
+                            <li>Mon-Fri <span>{{ \App\Models\Setting::get('working_hours_weekday', '8:00 AM - 7:00 PM') }}</span></li>
+                            <li>Saturday <span>{{ \App\Models\Setting::get('working_hours_saturday', '2:00 PM - 9:00 PM') }}</span></li>
+                            <li>Sunday <span>{{ \App\Models\Setting::get('working_hours_sunday', 'Close') }}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="vl-copy-righ1t">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 mb-30">
+                        <div class="vl-footer-copy-right-widget">
+                            @php
+                                $copyrightText = \App\Models\Setting::get('footer_copyright_text', '');
+                                $copyrightLink = \App\Models\Setting::get('footer_copyright_link', '');
+                                
+                                // Jika custom text kosong, gunakan default
+                                if (empty($copyrightText)) {
+                                    $copyrightText = '© Copyright ' . date('Y') . ' - ' . $siteName . '. All Right Reserved';
+                                } else {
+                                    // Replace placeholders
+                                    $copyrightText = str_replace('{year}', date('Y'), $copyrightText);
+                                    $copyrightText = str_replace('{site_name}', $siteName, $copyrightText);
+                                }
+                            @endphp
+                            @if(!empty($copyrightLink))
+                                <p class="para para-4" style="color: {{ $footerTextColor }};">
+                                    <a href="{{ $copyrightLink }}" style="color: {{ $footerTextColor }}; text-decoration: none;">{{ $copyrightText }}</a>
+                                </p>
+                            @else
+                                <p class="para para-4" style="color: {{ $footerTextColor }};">{{ $copyrightText }}</p>
+                            @endif
+                            <p class="para para-4 mt-2" style="color: {{ $footerTextColor }}; font-size: 14px;">
+                                Technical Development by <a href="https://fhimawan.my.id" target="_blank" rel="noopener noreferrer" style="color: {{ $footerTextColor }}; text-decoration: none;">Firmanda Himawan</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 mb-30">
+                        <div class="vl-copyright-menu4">
+                            @php
+                                $termsLink = \App\Models\Setting::get('footer_terms_link', '#');
+                                $privacyLink = \App\Models\Setting::get('footer_privacy_link', '#');
+                            @endphp
+                            <a href="{{ $termsLink }}" style="color: {{ $footerTextColor }};">Terms & Conditions</a>
+                            <a href="{{ $privacyLink }}" style="color: {{ $footerTextColor }};">Privacy Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--================= Footer section End =================-->

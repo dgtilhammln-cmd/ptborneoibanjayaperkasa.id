@@ -1,0 +1,439 @@
+@extends('layouts.frontend')
+
+@push('head')
+@php
+    $breadcrumbs = [
+        ['name' => 'Home', 'url' => url('/')],
+        ['name' => 'Produk', 'url' => url('/products')],
+        ['name' => $product->name, 'url' => url('/product/' . $product->slug)]
+    ];
+@endphp
+@include('partials.schema', ['schemaType' => 'breadcrumb', 'breadcrumbs' => $breadcrumbs])
+@include('partials.schema', ['schemaType' => 'organization'])
+@include('partials.schema', ['schemaType' => 'product', 'product' => $product])
+@endpush
+
+@section('content')
+<!--================= Breadcrumb section start =================-->
+<section class="vl-breadcrumb-bg" style="background-image: url({{ asset('assets/img/shape/breadcrumb-shape.svg') }});">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-8 mx-auto text-center mb-30">
+                <div class="vl-breadcrumb-content">
+                    <h2 class="title pb-20">Detail Produk</h2>
+                    <ul>
+                        <li><a href="{{ url('/') }}">Home </a></li>
+                        <li><i class="fa-light fa-angle-right"></i></li>
+                        <li><a href="{{ route('products') }}">Produk</a></li>
+                        <li><i class="fa-light fa-angle-right"></i></li>
+                        <li><a class="active" href="#">{{ $product->name }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================= Breadcrumb section End =================-->
+
+<!--================= Team Details section Start =================-->
+<section class="vl-team-details-area vkl-gray-bg-1 pt-100 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4 col-lg-5 mb-30">
+                <div class="team__details__post">
+                    <div class="row">
+                        <div class="col-12">
+                             <!-- thumbnail -->
+                             <div class="card image-fluid">
+                                @php
+                                    $allImages = $product->getAllImages();
+                                @endphp
+                                @if(count($allImages) > 0)
+                                    <img class="image-fluid" src="{{ Str::startsWith($allImages[0], 'http') ? $allImages[0] : asset($allImages[0]) }}" alt="{{ $product->name }}">
+                                @else
+                                    <img class="image-fluid" src="{{ asset('assets/images/product-placeholder.jpg') }}" alt="{{ $product->name }}">
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-12">
+                                                <div class="team__details__post-auth" style="margin-top=0;">
+                        <h4 class="title pb-32"><a href="#">{{ $product->name }}</a></h4>
+                        <!-- more info -->
+                        <div class="team__details__post-moreinfo">
+                            <ul>
+                                <li>
+                                    <label>Kategori:</label>
+                                    <span>{{ $product->category ?? 'Sparepart' }}</span>
+                                </li>
+                                <li>
+                                    <label>Material:</label>
+                                    <span>Besi / Stainless</span>
+                                </li>
+                                <li>
+                                    <label>Kualitas:</label>
+                                    <span>Premium</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- icon list -->
+                        <div class="team__details__post-iconlist mt-32">
+                            <ul>
+                                @php
+                                    $contact_phone = \App\Models\Setting::get('contact_phone', '');
+                                    $contact_email = \App\Models\Setting::get('contact_email', '');
+                                    $contact_address = \App\Models\Setting::get('contact_address', '');
+                                @endphp
+                                @if($contact_phone)
+                                <li><a href="{{ formatWhatsApp($contact_phone) }}" target="_blank"><span class="mr-8"><i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 18px;"></i></span>{{ $contact_phone }}</a></li>
+                                @endif
+                                @if($contact_address)
+                                <li><a href="#"><span class="mr-8"><i class="fa-solid fa-location-dot" style="color: #1E3A8A; font-size: 18px;"></i></span>{{ Str::limit($contact_address, 30) }}</a></li>
+                                @endif
+                                @if($contact_email)
+                                <li><a href="mailto:{{ $contact_email }}"><span class="mr-8"><i class="fa-solid fa-envelope" style="color: #1E3A8A; font-size: 18px;"></i></span>{{ $contact_email }}</a></li>
+                                @endif
+                            </ul>
+                        </div>
+                        <!-- social -->
+                        <div class="vl-footer-social-widget team-social mt-32">
+                            <a href="instagram.com/pt_bijp"><i class="fa-brands fa-instragram"></i></a>
+                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-7 mb-30">
+                <div class="team__details__desc ml-50">
+                    <!-- title -->
+                    <div class="team__details__desc-heading">
+                        <h3 class="title pb-12">{{ $product->name }}</h3>
+                        <span class="desegnitation">Produk Berkualitas Tinggi</span>
+                    </div>
+                    <!-- rating -->
+                    <div class="d-flex align-items-center pt-24 pb-15">
+                        <div class="team__details__desc-review">
+                            <ul>
+                                <li><i class="fa-solid fa-star"></i></li>
+                                <li><i class="fa-solid fa-star"></i></li>
+                                <li><i class="fa-solid fa-star"></i></li>
+                                <li><i class="fa-solid fa-star"></i></li>
+                                <li><i class="fa-solid fa-star"></i></li>
+                            </ul>
+                        </div>
+                        <div class="team__details__desc-review-number">
+                            <span>(5.0)</span>
+                        </div>
+                    </div>
+                    <!-- content block -->
+                    <div class="team__details__desc-content">
+                        @if($product->description)
+                            {!! $product->description !!}
+                        @else
+                        <p class="para">Produk berkualitas tinggi yang dirancang khusus untuk memenuhi kebutuhan industri dan otomotif. Dibuat dengan presisi tinggi menggunakan material premium yang tahan lama dan teruji kualitasnya.</p>
+                        <p class="para pt-16">Dengan pengalaman bertahun-tahun dalam produksi sparepart dan komponen logam, kami memastikan setiap produk yang kami hasilkan memenuhi standar kualitas tertinggi. Produk ini cocok untuk berbagai aplikasi industri dan otomotif dengan performa yang handal.</p>
+                        <p class="para pt-16">Kami menggunakan teknologi produksi terkini dan kontrol kualitas yang ketat untuk memastikan setiap produk yang keluar dari pabrik kami memiliki kualitas yang konsisten dan dapat diandalkan. Produk ini telah teruji di berbagai kondisi dan aplikasi, memberikan jaminan kualitas yang tidak perlu diragukan.</p>
+                        @endif
+                    </div>
+                    <!-- CTA Buttons -->
+                    <div class="tp-team-skill-info mt-30 mb-60">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <a href="{{ formatWhatsApp($contact_phone, 'Halo, saya tertarik dengan produk ' . $product->name . '. Bisa tolong berikan informasi lebih lanjut?') }}" 
+                                   target="_blank" 
+                                   class="btn w-100 d-flex align-items-center justify-content-center" 
+                                   style="background: #25D366; color: white; padding: 16px 24px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s; border: none; font-size: 16px;">
+                                    <i class="fa-brands fa-whatsapp me-2" style="font-size: 20px;"></i>
+                                    Chat via WhatsApp
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" 
+                                        class="btn w-100 d-flex align-items-center justify-content-center" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#productQuoteModal"
+                                        style="background: #25D366; color: white; padding: 16px 24px; border-radius: 50px; font-weight: 600; border: none; font-size: 16px; transition: all 0.3s;">
+                                    <i class="fa-solid fa-file-invoice-dollar me-2"></i>
+                                    Minta Penawaran Khusus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team__member__details">
+                <h3 class="title pb-24">Tentang {{ $product->name }}</h3>
+                <p class="para">Dengan pengalaman lebih dari 20 tahun dalam produksi sparepart dan komponen logam, {{ $product->name }} adalah produk unggulan kami yang telah teruji kualitasnya. Kami mengkhususkan diri dalam produksi komponen otomotif, sparepart industri, dan aksesori berkualitas tinggi dengan presisi yang sempurna.</p>
+            
+                <h4 class="tagtitle pb-24 mt-32">Tags:</h4>
+                <a href="{{ route('products') }}" class="tagbg">Sparepart</a>
+                <a href="{{ route('products') }}" class="tagbg">Komponen Otomotif</a>
+                <a href="{{ route('products') }}" class="tagbg">Produk Industri</a>
+
+                <div class="vl-teammember-expbox mt-32">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- single box -->
+                            <div class="single-expbox mb-30">
+                                <h3 class="title">Pengalaman</h3>
+                                <p class="para">Lebih dari 19 tahun dalam produksi sparepart berkualitas</p>
+                            </div>
+                            <!-- single box -->
+                            <div class="single-expbox mb-30">
+                                <h3 class="title">Material</h3>
+                                <p class="para">Besi, Stainless Steel, dan Material Premium</p>
+                            </div>
+                            <!-- single box -->
+                            <div class="single-expbox mb-30">
+                                <h3 class="title">Aplikasi</h3>
+                                <p class="para">Otomotif, Industri, dan Aplikasi Umum</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- single box -->
+                            <div class="single-expbox mb-30">
+                                <h3 class="title">Spesifikasi</h3>
+                                <p class="para">Presisi tinggi, tahan lama, dan berkualitas premium</p>
+                            </div>
+                            <!-- single box -->
+                            <div class="single-expbox mb-30">
+                                <h3 class="title">Garansi</h3>
+                                <p class="para">Kualitas terjamin dengan standar internasional</p>
+                            </div>
+                            <!-- single box -->
+                            <div class="single-expbox mb-30">
+                                <h3 class="title">Pengiriman</h3>
+                                <p class="para">Seluruh Indonesia dengan pengiriman cepat</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================= Team Details section End =================-->
+
+<!--================= about team-member start =================-->
+<section class="vl-team-member-about-details vkl-gray-bg-1 pb-70">
+    <div class="container">
+       <div class="row">
+          <div class="col-xl-12 mb-30">
+             <div class="team__member__details-cf ml-35">
+                <h4 class="title pb-32">Hubungi Kami</h4>
+                <!-- iicon list -->
+                <div class="team__details__post-iconlist mb-32">
+                    <ul>
+                        @if($contact_phone)
+                        <li><a href="{{ formatWhatsApp($contact_phone) }}" target="_blank"><span><i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 18px;"></i></span>{{ $contact_phone }}</a></li>
+                        @endif
+                        @if($contact_address)
+                        <li><a href="#"><span><i class="fa-solid fa-location-dot" style="color: #1E3A8A; font-size: 18px;"></i></span>{{ $contact_address }}</a></li>
+                        @endif
+                        @if($contact_email)
+                        <li><a href="mailto:{{ $contact_email }}"><span><i class="fa-solid fa-envelope" style="color: #1E3A8A; font-size: 18px;"></i></span>{{ $contact_email }}</a></li>
+                        @endif
+                    </ul>
+                </div>
+                <div class="team__member__details-formarea">
+                   <form action="{{ url('/contact') }}" method="GET">
+                      <div class="row">
+                         <div class="col-lg-6">
+                            <input class="mb-16" type="text" name="name" placeholder="Nama Lengkap" required>
+                         </div>
+                         <div class="col-lg-6">
+                            <input class="mb-16" type="email" name="email" placeholder="Email Address" required>
+                         </div>
+                         <div class="col-lg-12">
+                            <textarea name="message" id="message" placeholder="Bagaimana kami bisa membantu Anda?" required>Saya tertarik dengan produk: {{ $product->name }}</textarea>
+                         </div>
+                         <div class="col-lg-12 mt-24">
+                            <div class="vl-team-details-btn">
+                                <button type="submit" class="br-50 vl-primary-btn3 vl-primary-btn3-9">Kirim Sekarang <i class="fa-regular fa-arrow-right"></i></button>
+                            </div>
+                            
+                         </div>
+                      </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+</section>
+<!--================= about team-member end =================-->
+
+<!-- Related Products Carousel Start -->
+@if($relatedProducts && $relatedProducts->count() > 0)
+<section id="service" class="vl-service-iner vkl-gray-bg-1 fix pt-100 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 mx-auto text-center">
+                <h3 class="more-title mb-60">Produk Terkait</h3>
+            </div>
+        </div>
+        <div class="row">
+            @foreach($relatedProducts as $related)
+            <div class="col-xl-4 col-md-6 mb-30">
+                <!-- single box Item Start -->
+                <div class="vl-solution-box-wrap2">
+                    <!-- thumb -->
+                    <div class="vl-thumb">
+                        @if($related->image)
+                        <img src="{{ Str::startsWith($related->image, 'http') ? $related->image : asset($related->image) }}" alt="{{ $related->name }}">
+                        <img src="{{ Str::startsWith($related->image, 'http') ? $related->image : asset($related->image) }}" alt="{{ $related->name }}">
+                        @else
+                        <img src="{{ asset('assets/images/product-placeholder.jpg') }}" alt="{{ $related->name }}">
+                        <img src="{{ asset('assets/images/product-placeholder.jpg') }}" alt="{{ $related->name }}">
+                        @endif
+                    </div>
+                    <!-- content -->
+                    <div class="vl-content">
+                        <h3 class="title"><a href="{{ url('/products/' . $related->slug) }}">{{ $related->name }}</a></h3>
+                        <p class="para">{{ Str::limit(strip_tags($related->description), 100) }}</p>
+                        <a href="{{ url('/products/' . $related->slug) }}" class="solutation-more">Lihat Detail <span><i class="fa-regular fa-arrow-right"></i></span></a>
+                    </div>
+                </div> <!-- single box Item End --> 
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+<!-- Related Products Carousel End -->
+
+@include('partials.cta')
+
+<!-- Product Quote Modal -->
+<div class="modal fade" id="productQuoteModal" tabindex="-1" aria-labelledby="productQuoteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border-radius: 15px; border: none; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; padding: 20px 30px;">
+                <h5 class="modal-title" id="productQuoteModalLabel" style="font-size: 24px; font-weight: 600;">
+                    <i class="fa-solid fa-file-invoice-dollar" style="color: #25D366; margin-right: 10px;"></i>
+                    Minta Penawaran Khusus
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 30px;">
+                <div class="alert alert-info mb-4" style="border-radius: 8px; padding: 12px; background-color: #e7f3ff; border: 1px solid #b3d9ff;">
+                    <i class="fa-solid fa-info-circle me-2"></i>
+                    <strong>Produk:</strong> {{ $product->name }}
+                </div>
+                <form id="productQuoteForm">
+                    <input type="hidden" name="product_name" value="{{ $product->name }}">
+                    <input type="hidden" name="product_slug" value="{{ $product->slug }}">
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="quoteName" class="form-label" style="font-weight: 500; margin-bottom: 8px;">Nama Lengkap <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="quoteName" name="name" required placeholder="Masukkan nama lengkap Anda" style="border-radius: 8px; padding: 12px; border: 1px solid #ddd;">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="quotePhone" class="form-label" style="font-weight: 500; margin-bottom: 8px;">Nomor WhatsApp <span style="color: red;">*</span></label>
+                            <input type="tel" class="form-control" id="quotePhone" name="phone" required placeholder="08xxxxxxxxxx" style="border-radius: 8px; padding: 12px; border: 1px solid #ddd;">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="quoteEmail" class="form-label" style="font-weight: 500; margin-bottom: 8px;">Email</label>
+                            <input type="email" class="form-control" id="quoteEmail" name="email" placeholder="nama@email.com" style="border-radius: 8px; padding: 12px; border: 1px solid #ddd;">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="quoteQuantity" class="form-label" style="font-weight: 500; margin-bottom: 8px;">Jumlah (Pcs) <span style="color: red;">*</span></label>
+                            <input type="number" class="form-control" id="quoteQuantity" name="quantity" required placeholder="Contoh: 100" min="1" style="border-radius: 8px; padding: 12px; border: 1px solid #ddd;">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="quoteSpecs" class="form-label" style="font-weight: 500; margin-bottom: 8px;">Spesifikasi / Ukuran</label>
+                            <textarea class="form-control" id="quoteSpecs" name="specs" rows="3" placeholder="Jelaskan spesifikasi atau ukuran yang diinginkan (opsional)..." style="border-radius: 8px; padding: 12px; border: 1px solid #ddd; resize: vertical;"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="quoteMessage" class="form-label" style="font-weight: 500; margin-bottom: 8px;">Catatan Tambahan</label>
+                            <textarea class="form-control" id="quoteMessage" name="message" rows="3" placeholder="Tambahkan catatan atau pertanyaan lainnya (opsional)..." style="border-radius: 8px; padding: 12px; border: 1px solid #ddd; resize: vertical;"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning mt-4" style="border-radius: 8px; padding: 12px; background-color: #fff3cd; border: 1px solid #ffc107;">
+                        <i class="fa-solid fa-exclamation-triangle me-2"></i>
+                        <small>Form ini akan dikirim melalui WhatsApp. Pastikan nomor WhatsApp Anda aktif dan dapat dihubungi.</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid #e9ecef; padding: 20px 30px;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 8px; padding: 10px 20px;">Batal</button>
+                <button type="button" class="btn btn-success" id="submitProductQuote" style="background: #25D366; border: none; border-radius: 8px; padding: 10px 30px; font-weight: 600;">
+                    <i class="fa-brands fa-whatsapp me-2"></i>
+                    Kirim via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('js')
+<script>
+(function() {
+    'use strict';
+    
+    const productQuoteForm = document.getElementById('productQuoteForm');
+    const submitBtn = document.getElementById('submitProductQuote');
+    
+    if (submitBtn && productQuoteForm) {
+        submitBtn.addEventListener('click', function() {
+            // Validate form
+            if (!productQuoteForm.checkValidity()) {
+                productQuoteForm.reportValidity();
+                return;
+            }
+            
+            // Get form data
+            const formData = new FormData(productQuoteForm);
+            const data = Object.fromEntries(formData);
+            
+            // Build WhatsApp message
+            let message = `*Minta Penawaran Khusus - ${data.product_name}*\n\n`;
+            message += `*Nama:* ${data.name}\n`;
+            message += `*WhatsApp:* ${data.phone}\n`;
+            if (data.email) {
+                message += `*Email:* ${data.email}\n`;
+            }
+            message += `*Jumlah:* ${data.quantity} Pcs\n`;
+            if (data.specs) {
+                message += `*Spesifikasi/Ukuran:* ${data.specs}\n`;
+            }
+            if (data.message) {
+                message += `*Catatan:* ${data.message}\n`;
+            }
+            message += `\n*Produk:* ${data.product_name}\n`;
+            message += `*Link Produk:* ${window.location.href}\n`;
+            
+            // Get WhatsApp number from settings
+            const whatsappNumber = '{{ \App\Models\Setting::get("contact_phone", "03185597449") }}';
+            const cleanNumber = whatsappNumber.replace(/\D/g, '');
+            const whatsappLink = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp
+            window.open(whatsappLink, '_blank');
+            
+            // Close modal
+            const modalElement = document.getElementById('productQuoteModal');
+            if (modalElement) {
+                const modal = bootstrap.Modal.getInstance(modalElement);
+                if (modal) {
+                    modal.hide();
+                }
+            }
+            
+            // Reset form
+            productQuoteForm.reset();
+        });
+    }
+})();
+</script>
+@endpush
+
+@endsection
