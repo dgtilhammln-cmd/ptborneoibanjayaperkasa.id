@@ -20,7 +20,7 @@ class PageController extends Controller
             ->firstOrFail();
 
         // Set SEO meta tags
-        SEOTools::setTitle($page->seo_title . ' - ' . Setting::get('site_name', 'Borneo Jaya'));
+        SEOTools::setTitle($page->seo_title);
 
         if ($page->meta_description) {
             SEOTools::setDescription($page->meta_description);

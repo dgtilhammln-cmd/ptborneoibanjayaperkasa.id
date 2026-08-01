@@ -206,7 +206,7 @@ class HomeController extends Controller
         
         if ($page) {
             // Set SEO from page data
-            SEOTools::setTitle(($page->meta_title ?: $page->title) . ' - ' . Setting::get('site_name', 'Borneo Jaya'));
+            SEOTools::setTitle(($page->meta_title ?: $page->title));
             SEOTools::setDescription($page->meta_description ?: Setting::get('company_about', ''));
             
             if ($page->og_image) {
@@ -223,7 +223,7 @@ class HomeController extends Controller
         $metaDescription = Setting::get('seo_meta_description');
         $ogImage = Setting::get('seo_og_image');
         
-        SEOTools::setTitle(($metaTitle ? $metaTitle . ' - ' : '') . 'About Us - ' . Setting::get('site_name', 'Borneo Jaya'));
+        SEOTools::setTitle(($metaTitle ? $metaTitle . ' - ' : '') . 'About Us');
         SEOTools::setDescription($metaDescription ?: Setting::get('company_about', ''));
         
         if ($ogImage) {
@@ -243,7 +243,7 @@ class HomeController extends Controller
         
         if ($page) {
             // Set SEO from page data
-            SEOTools::setTitle(($page->meta_title ?: $page->title) . ' - ' . Setting::get('site_name', 'Borneo Jaya'));
+            SEOTools::setTitle(($page->meta_title ?: $page->title));
             SEOTools::setDescription($page->meta_description ?: Setting::get('company_about', ''));
             
             if ($page->og_image) {
@@ -257,7 +257,7 @@ class HomeController extends Controller
             $metaDescription = Setting::get('seo_meta_description');
             $ogImage = Setting::get('seo_og_image');
             
-            SEOTools::setTitle(($metaTitle ? $metaTitle . ' - ' : '') . 'Services - ' . Setting::get('site_name', 'Borneo Jaya'));
+            SEOTools::setTitle(($metaTitle ? $metaTitle . ' - ' : '') . 'Services');
             SEOTools::setDescription($metaDescription ?: Setting::get('company_about', ''));
             
             if ($ogImage) {
@@ -280,7 +280,7 @@ class HomeController extends Controller
         $metaTitle = $service->meta_title ?: $service->name;
         $metaDescription = $service->meta_description ?: Str::limit(strip_tags($service->description), 160);
         
-        SEOTools::setTitle($metaTitle . ' - ' . Setting::get('site_name', 'Borneo Jaya'));
+        SEOTools::setTitle($metaTitle);
         SEOTools::setDescription($metaDescription);
         
         if ($service->image) {
@@ -306,7 +306,7 @@ class HomeController extends Controller
         
         if ($page) {
             // Set SEO from page data
-            SEOTools::setTitle(($page->meta_title ?: $page->title) . ' - ' . Setting::get('site_name', 'Borneo Jaya'));
+            SEOTools::setTitle(($page->meta_title ?: $page->title));
             SEOTools::setDescription($page->meta_description ?: Setting::get('company_about', ''));
             
             if ($page->og_image) {
@@ -320,7 +320,7 @@ class HomeController extends Controller
             $metaDescription = Setting::get('seo_meta_description');
             $ogImage = Setting::get('seo_og_image');
             
-            SEOTools::setTitle(($metaTitle ? $metaTitle . ' - ' : '') . 'Blog - ' . Setting::get('site_name', 'Borneo Jaya'));
+            SEOTools::setTitle(($metaTitle ? $metaTitle . ' - ' : '') . 'Blog');
             SEOTools::setDescription($metaDescription ?: Setting::get('company_about', ''));
             
             if ($ogImage) {
@@ -346,7 +346,7 @@ class HomeController extends Controller
         $metaTitle = $blog->meta_title ?: $blog->title;
         $metaDescription = $blog->meta_description ?: Str::limit(strip_tags($blog->content), 160);
         
-        SEOTools::setTitle($metaTitle . ' - ' . Setting::get('site_name', 'Borneo Jaya'));
+        SEOTools::setTitle($metaTitle);
         SEOTools::setDescription($metaDescription);
         
         if ($blog->meta_keywords) {
@@ -380,7 +380,7 @@ class HomeController extends Controller
         
         if ($page) {
             // Set SEO from page data
-            SEOTools::setTitle(($page->meta_title ?: $page->title) . ' - ' . Setting::get('site_name', 'Borneo Jaya'));
+            SEOTools::setTitle(($page->meta_title ?: $page->title));
             SEOTools::setDescription($page->meta_description ?: Setting::get('company_about', ''));
             
             if ($page->og_image) {
@@ -394,7 +394,7 @@ class HomeController extends Controller
             $metaDescription = Setting::get('seo_meta_description');
             $ogImage = Setting::get('seo_og_image');
             
-            SEOTools::setTitle(($metaTitle ? $metaTitle . ' - ' : '') . 'Contact Us - ' . Setting::get('site_name', 'Borneo Jaya'));
+            SEOTools::setTitle(($metaTitle ? $metaTitle . ' - ' : '') . 'Contact Us');
             SEOTools::setDescription($metaDescription ?: Setting::get('company_about', ''));
             
             if ($ogImage) {
@@ -419,7 +419,7 @@ class HomeController extends Controller
         
         if ($page) {
             // Set SEO from page data
-            SEOTools::setTitle(($page->meta_title ?: $page->title) . ' - ' . Setting::get('site_name', 'Borneo Jaya'));
+            SEOTools::setTitle(($page->meta_title ?: $page->title));
             SEOTools::setDescription($page->meta_description ?: Setting::get('company_about', ''));
             
             if ($page->og_image) {
@@ -433,7 +433,7 @@ class HomeController extends Controller
             $metaDescription = Setting::get('seo_meta_description');
             $ogImage = Setting::get('seo_og_image');
             
-            SEOTools::setTitle(($metaTitle ? $metaTitle . ' - ' : '') . 'Products - ' . Setting::get('site_name', 'Borneo Jaya'));
+            SEOTools::setTitle(($metaTitle ? $metaTitle . ' - ' : '') . 'Products');
             SEOTools::setDescription($metaDescription ?: Setting::get('company_about', ''));
             
             if ($ogImage) {
@@ -456,7 +456,7 @@ class HomeController extends Controller
         $metaTitle = $product->meta_title ?: $product->name;
         $metaDescription = $product->meta_description ?: Str::limit(strip_tags($product->description), 160);
         
-        SEOTools::setTitle($metaTitle . ' - ' . Setting::get('site_name', 'Borneo Jaya'));
+        SEOTools::setTitle($metaTitle);
         SEOTools::setDescription($metaDescription);
         
         if ($product->image) {
