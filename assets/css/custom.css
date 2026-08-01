@@ -9834,3 +9834,111 @@ img {
 	}
 }
 
+/* ============================================================
+ * LAYAR 14 INCH OPTIMIZATION (1280px - 1440px)
+ * Menyesuaikan ukuran agar proporsional di laptop 14"
+ * ============================================================ */
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+
+	/* --- HEADER: Lebih slim dan compact --- */
+	.vl-main-menu ul > li > a {
+		padding: 20px 0;
+		font-size: 15px !important;
+	}
+
+	.vl-main-menu ul > li {
+		margin: 0 10px;
+	}
+
+	.vl-logo img,
+	.vl-header-area .vl-logo img {
+		max-width: 150px !important;
+	}
+
+	.vl-header-menu-iconbox2-5 {
+		font-size: 14px;
+	}
+
+	.vl-header-menu-iconbox2-5 .content a.topnumber {
+		font-size: 14px !important;
+	}
+
+	.vl-header-menu-iconbox2-5 .content p.para {
+		font-size: 12px !important;
+	}
+
+	/* --- HERO BANNER: Lebih proporsional --- */
+	.vl-banner-five-padding {
+		padding-top: 140px !important;
+		padding-bottom: 40px !important;
+	}
+
+	.vl-banner-content-5 .vl-section-title .title {
+		font-size: 48px !important;
+		line-height: 58px !important;
+	}
+
+	.vl-banner-content-5 .vl-section-title .para {
+		font-size: 15px !important;
+		line-height: 24px !important;
+	}
+
+	.vl-banner-content-5 .mb-76 {
+		margin-bottom: 30px !important;
+	}
+
+	/* Banner image height constraint */
+	.banner-wrap5 .banner-thumb-bg {
+		min-height: 90vh;
+		max-height: 100vh;
+	}
+
+	.banner-thumb3 {
+		height: 100%;
+		max-height: 100vh;
+	}
+
+	/* Review box in banner */
+	.review-blox-flex5 .review-number .num,
+	.review-blox-flex5 .total-review .para {
+		font-size: 15px !important;
+	}
+
+	/* Buttons in banner */
+	.vl-primary-btn5 {
+		padding: 12px 22px !important;
+		font-size: 14px !important;
+	}
+
+	/* Thumbnail images below banner content */
+	.vl-sm-thumb-mtop {
+		margin-top: -150px !important;
+	}
+
+	.mySwiperthumb {
+		margin-left: 30px !important;
+	}
+}
+
+/* Extra optimization for smaller 14" (1280px-1366px) */
+@media only screen and (min-width: 1200px) and (max-width: 1366px) {
+
+	.vl-banner-five-padding {
+		padding-top: 120px !important;
+		padding-bottom: 30px !important;
+	}
+
+	.vl-banner-content-5 .vl-section-title .title {
+		font-size: 42px !important;
+		line-height: 52px !important;
+	}
+
+	.vl-logo img {
+		max-width: 140px !important;
+	}
+
+	.vl-main-menu ul > li > a {
+		padding: 18px 0 !important;
+	}
+}
+
