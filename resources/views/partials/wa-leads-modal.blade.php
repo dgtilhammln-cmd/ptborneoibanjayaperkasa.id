@@ -65,10 +65,19 @@
 }
 
 #waLeadModal .modal-title {
-    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
     font-size: 24px;
-    letter-spacing: -0.5px;
+    color: #ffffff !important;
+    letter-spacing: 0px;
     margin-bottom: 4px;
+}
+
+#waLeadModal .modal-header p {
+    color: #ffffff !important;
+    opacity: 0.9;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
 }
 
 #waLeadModal .modal-header::after {
