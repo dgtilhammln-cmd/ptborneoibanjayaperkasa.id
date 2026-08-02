@@ -40,7 +40,7 @@
     animation-delay: 1s;
 }
 
-@keyframes waPulse {
+@@keyframes waPulse {
     0% { transform: scale(1); opacity: 0.8; }
     100% { transform: scale(1.6); opacity: 0; }
 }
@@ -136,7 +136,7 @@
 }
 
 /* Mobile Friendly Adjustments */
-@media (max-width: 768px) {
+@@media (max-width: 768px) {
     .floating-wa-btn {
         bottom: 20px;
         right: 20px;
