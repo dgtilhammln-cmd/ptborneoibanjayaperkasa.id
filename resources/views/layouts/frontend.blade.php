@@ -82,16 +82,18 @@
     </script>
     @endif
     
-    <!-- Critical CSS - Load immediately for above-the-fold content -->
-    <link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/bootstrap.min.css') }}">
+    <!-- Critical CSS - Preload to prevent render blocking -->
+    <link rel="preload" href="{{ asset('assets/css/barfi/plugins/bootstrap.min.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/bootstrap.min.css') }}"></noscript>
     
     <!-- Async CSS Loader Script -->
     <script>
         !function(e){"use strict";var t=function(t,n,o){var i,r=e.document,a=r.createElement("link");if(n)a.rel=n;else{if(!(i="preload"===a.rel))return;}a.href=t,a.href.indexOf("http")||(a.crossOrigin="anonymous"),"style"===n&&(a.onload=function(){this.media="all"},a.media="print"),o&&(a.onload=function(){this.onload=null,o(this)},a.onload()),r.head.appendChild(a)};e.loadCSS=t}("undefined"!=typeof global?global:this);
     </script>
     
-    <!-- Critical CSS - Load immediately for above-the-fold content -->
-    <link rel="stylesheet" href="{{ asset('assets/css/barfi/style.css') }}">
+    <!-- Theme CSS - Preload to prevent render blocking -->
+    <link rel="preload" href="{{ asset('assets/css/barfi/style.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('assets/css/barfi/style.css') }}"></noscript>
     <link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/swiper-bundle.min.css') }}" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/swiper-bundle.min.css') }}"></noscript>
     
@@ -123,7 +125,33 @@
 </head>
 
 <body>  
-   
+    <!-- Simple Preloader -->
+    <div id="simple-preloader" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#ffffff; z-index:999999; display:flex; justify-content:center; align-items:center; transition:opacity 0.5s ease;">
+        @php
+            $logo = \App\Models\Setting::get('site_logo');
+            $logoUrl = $logo ? asset($logo) : asset('assets/images/logo.svg');
+        @endphp
+        <img src="{{ $logoUrl }}" alt="Loading..." style="height:50px; animation: pulseLoad 1.2s infinite ease-in-out;">
+        <style>
+            @keyframes pulseLoad {
+                0% { transform: scale(0.9); opacity: 0.6; }
+                50% { transform: scale(1.1); opacity: 1; }
+                100% { transform: scale(0.9); opacity: 0.6; }
+            }
+            body { overflow: hidden; } /* Prevent scroll during load */
+        </style>
+    </div>
+    <script>
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('simple-preloader');
+            if(preloader) {
+                preloader.style.opacity = '0';
+                document.body.style.overflow = 'auto';
+                setTimeout(() => { preloader.remove(); }, 500);
+            }
+        });
+    </script>
+
 
     @include('partials.header')
 

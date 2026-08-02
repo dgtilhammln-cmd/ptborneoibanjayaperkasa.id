@@ -249,7 +249,7 @@
         /* ── STAT CARDS ── */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 16px;
             margin-bottom: 20px;
         }
@@ -870,22 +870,6 @@
                 <div class="stat-label">Visitor (30 Hari)</div>
                 <div class="stat-progress-track">
                     <div class="stat-progress-fill fill-blue" data-width="{{ $visitorBar }}"></div>
-                </div>
-            </div>
-            <div class="stat-card anim" style="animation-delay:0.2s">
-                <div class="stat-card-icon ic-teal"><i class="mdi mdi-phone-incoming-outline"></i></div>
-                <div class="stat-number">{{ number_format($phoneLeads) }}</div>
-                <div class="stat-label">Phone Leads (30 Hari)</div>
-                <div class="stat-progress-track">
-                    <div class="stat-progress-fill fill-teal" data-width="{{ $phoneBar }}"></div>
-                </div>
-            </div>
-            <div class="stat-card anim" style="animation-delay:0.25s">
-                <div class="stat-card-icon ic-violet"><i class="mdi mdi-email-outline"></i></div>
-                <div class="stat-number">{{ number_format($emailLeads) }}</div>
-                <div class="stat-label">Email Leads (30 Hari)</div>
-                <div class="stat-progress-track">
-                    <div class="stat-progress-fill fill-violet" data-width="{{ $emailBar }}"></div>
                 </div>
             </div>
             <div class="stat-card anim" style="animation-delay:0.3s">

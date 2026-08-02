@@ -92,7 +92,7 @@
 }
 .blog-main-heading {
     font-size: clamp(28px, 3vw, 42px);
-    font-weight: 800;
+    font-weight: 600;
     color: var(--gray-900);
     letter-spacing: -1px;
     line-height: 1.2;

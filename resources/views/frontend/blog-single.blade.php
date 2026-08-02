@@ -45,8 +45,8 @@
                     
                     <!-- Header Meta & Title -->
                     <div class="mb-30">
-                        <span style="background: #eef2ff; color: #1E3A8A; padding: 6px 16px; border-radius: 50px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block; margin-bottom: 20px;">Berita & Wawasan</span>
-                        <h1 style="font-size: clamp(28px, 4vw, 42px); color: #0F2453; font-weight: 800; line-height: 1.3; margin-bottom: 25px;">{{ $blog->title }}</h1>
+                        <span style="background: #eef2ff; color: #1E3A8A; padding: 6px 16px; border-radius: 50px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block; margin-bottom: 20px;">Berita & Wawasan</span>
+                        <h1 style="font-size: clamp(28px, 4vw, 42px); color: #0F2453; font-weight: 600; line-height: 1.3; margin-bottom: 25px;">{{ $blog->title }}</h1>
                         
                         <div style="display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 25px; border-bottom: 1px solid #f0f0f0;">
                             <div style="display: flex; align-items: center; gap: 10px;">
@@ -81,7 +81,7 @@
                     <div style="font-size: 17px; color: #4b5563; line-height: 1.9; margin-bottom: 40px;">
                         <style>
                             .blog-rich-content p { margin-bottom: 25px; }
-                            .blog-rich-content h2, .blog-rich-content h3 { color: #0F2453; font-weight: 800; margin-top: 40px; margin-bottom: 20px; }
+                            .blog-rich-content h2, .blog-rich-content h3 { color: #0F2453; font-weight: 600; margin-top: 40px; margin-bottom: 20px; }
                             .blog-rich-content img { border-radius: 16px; margin: 20px 0; max-width: 100%; }
                         </style>
                         <div class="blog-rich-content">
@@ -95,7 +95,7 @@
                             <div class="col-md-7">
                                 @if($blog->meta_keywords)
                                 <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
-                                    <span style="font-weight: 800; color: #0F2453; font-size: 12px; margin-right: 10px; text-transform: uppercase;">Tags:</span>
+                                    <span style="font-weight: 600; color: #0F2453; font-size: 12px; margin-right: 10px; text-transform: uppercase;">Tags:</span>
                                     @foreach(explode(',', $blog->meta_keywords) as $keyword)
                                     <a href="{{ route('blog') }}?tag={{ trim($keyword) }}" style="background: #f0f4f8; color: #1E3A8A; padding: 6px 15px; border-radius: 50px; font-size: 12px; font-weight: 700; text-decoration: none; transition: 0.3s;">#{{ trim($keyword) }}</a>
                                     @endforeach
@@ -104,7 +104,7 @@
                             </div>
                             <div class="col-md-5 text-md-end">
                                 <div style="display: flex; gap: 10px; justify-content: md-end; align-items: center;">
-                                    <span style="font-weight: 800; color: #0F2453; font-size: 12px; text-transform: uppercase;">Share:</span>
+                                    <span style="font-weight: 600; color: #0F2453; font-size: 12px; text-transform: uppercase;">Share:</span>
                                     @php
                                         $shareUrl = urlencode(url('/blog/' . $blog->slug));
                                         $shareTitle = urlencode($blog->title);
@@ -125,7 +125,7 @@
                     
                     <!-- Search Widget -->
                      <div style="background: #fff; padding: 30px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f1f1f1; margin-bottom: 30px;">
-                        <h4 style="font-size: 18px; color: #0F2453; font-weight: 800; margin-bottom: 20px; border-left: 4px solid #0F2453; padding-left: 15px;">Pencarian</h4>
+                        <h4 style="font-size: 18px; color: #0F2453; font-weight: 600; margin-bottom: 20px; border-left: 4px solid #0F2453; padding-left: 15px;">Pencarian</h4>
                         <div style="position: relative;">
                             <form action="{{ route('blog') }}" method="GET">
                                 <input type="text" name="search" placeholder="Cari artikel..." value="{{ request('search') }}" style="width: 100%; padding: 12px 20px; border-radius: 12px; border: 1px solid #dee5f2; background: #fcfdfe; font-size: 14px; outline: none;">
@@ -136,7 +136,7 @@
 
                     <!-- Service Category Widget -->
                     <div style="background: #fff; padding: 30px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f1f1f1; margin-bottom: 30px;">
-                        <h4 style="font-size: 18px; color: #0F2453; font-weight: 800; margin-bottom: 20px; border-left: 4px solid #0F2453; padding-left: 15px;">Layanan Presisi</h4>
+                        <h4 style="font-size: 18px; color: #0F2453; font-weight: 600; margin-bottom: 20px; border-left: 4px solid #0F2453; padding-left: 15px;">Layanan Presisi</h4>
                         <div class="vl-service-list">
                             <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
                                 @php
@@ -157,7 +157,7 @@
                     <!-- Recent Posts Widget -->
                     @if($relatedBlogs && $relatedBlogs->count() > 0)
                     <div style="background: #fff; padding: 30px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f1f1f1; margin-bottom: 30px;">
-                        <h4 style="font-size: 18px; color: #0F2453; font-weight: 800; margin-bottom: 20px; border-left: 4px solid #0F2453; padding-left: 15px;">Artikel Terkini</h4>
+                        <h4 style="font-size: 18px; color: #0F2453; font-weight: 600; margin-bottom: 20px; border-left: 4px solid #0F2453; padding-left: 15px;">Artikel Terkini</h4>
                         <div style="display: flex; flex-direction: column; gap: 20px;">
                             @foreach($relatedBlogs->take(3) as $related)
                             <div style="display: flex; gap: 15px; align-items: center;">
