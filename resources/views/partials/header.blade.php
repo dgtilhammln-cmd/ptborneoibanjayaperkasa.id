@@ -135,36 +135,9 @@
         </div>
 
         <div class="vl-offcanvas-info vl-offcanvas-info-4 mb-30">
-            <h3 class="vl-offcanvas-sm-title mb-20">Contact Us</h3>
-            <div class="row g-3">
                 <div class="col-12">
-                    <a href="{{ $whatsappLink }}" target="_blank" class="vl-offcanvas-contact-link">
-                        <div class="row align-items-center g-0">
-                            <div class="col-auto">
-                                <span class="vl-offcanvas-icon"><i class="fa-brands fa-whatsapp"></i></span>
-                                {{ $contactPhone }}
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12">
-                    <a href="mailto:{{ \App\Models\Setting::get('contact_email', 'hello@snow.com') }}" class="vl-offcanvas-contact-link">
-                        <div class="row align-items-center g-0">
-                            <div class="col-auto">
-                                <span class="vl-offcanvas-icon"><img src="{{ asset('assets/img/barfi/icon/vl-icon-1.3.svg') }}" alt="Email"></span>
-                                {{ \App\Models\Setting::get('contact_email', 'hello@snow.com') }}
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12">
-                    <a href="#" class="vl-offcanvas-contact-link">
-                        <div class="row align-items-start g-0">
-                            <div class="col-auto">
-                                <span class="vl-offcanvas-icon"><img src="{{ asset('assets/img/barfi/icon/vl-icon-1.2.svg') }}" alt="Address"></span>
-                                {{ \App\Models\Setting::get('contact_address', 'Surabaya, Indonesia') }}
-                            </div>
-                        </div>
+                    <a href="{{ $whatsappLink }}" target="_blank" class="vl-offcanvas-contact-link" style="background: #25D366; color: white; padding: 12px 20px; border-radius: 12px; display: inline-block; width: 100%; text-align: center; text-decoration: none; font-weight: 700; margin-top: 15px;">
+                        <i class="fa-brands fa-whatsapp" style="margin-right: 8px; font-size: 18px;"></i> Hubungi via WhatsApp
                     </a>
                 </div>
             </div>
