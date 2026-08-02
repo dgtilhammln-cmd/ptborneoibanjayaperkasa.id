@@ -209,14 +209,7 @@
             <div class="col-lg-6 ps-lg-4">
                 <div class="vl-about-content">
                     
-                    <!-- Subtitle Premium -->
-                    <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(30, 58, 138, 0.08); padding: 8px 16px; border-radius: 30px; margin-bottom: 20px;" data-aos="fade-up">
-                        <!-- New Clean SVG Icon -->
-                        <span style="font-size: 13px; font-weight: 700; color: #003bc7; text-transform: uppercase; letter-spacing: 1.5px;">
-                            {{ $aboutSection->title ?? 'Tentang Kami' }}
-                        </span>
-                    </div>
-
+                    <!-- Subtitle Premium Removed -->
                     <!-- Heading Utama -->
 <h2 style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: clamp(28px, 4vw, 42px); color: #111827; font-weight: 700; line-height: 1.2; margin-bottom: 25px; letter-spacing: -1px;" data-aos="fade-up" data-aos-delay="100">
     {{ $aboutSection->heading ?? 'Solusi Terpercaya untuk Jasa Logam & Produksi Sparepart' }}
@@ -298,14 +291,7 @@
         <!-- Header Section -->
         <div class="row mb-5 justify-content-center">
             <div class="col-lg-7 text-center">
-                <!-- Subtitle Badge -->
-                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(30, 58, 138, 0.08); padding: 8px 16px; border-radius: 30px; margin-bottom: 20px;" data-aos="fade-up">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E3A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                    <span style="font-size: 13px; font-weight: 700; color: #1E3A8A; text-transform: uppercase; letter-spacing: 1.5px;">
-                        {{ $productsSection->subtitle ?? 'Katalog Produk' }}
-                    </span>
-                </div>
-
+                <!-- Subtitle Badge Removed -->
                 <!-- Heading Utama (Style 100% Sama dengan Request) -->
                 <h2 style="font-size: clamp(28px, 4vw, 40px); color: #111827; font-weight: 700; line-height: 1.2; letter-spacing: -1px; margin-bottom: 0;" data-aos="fade-up" data-aos-delay="100">
                     {{ $productsSection->heading ?? 'Produk Berkualitas untuk Kebutuhan Industri Anda' }}
@@ -429,14 +415,7 @@
         <!-- Header Section -->
         <div class="row mb-5 justify-content-center">
             <div class="col-lg-8 text-center">
-                <!-- Subtitle Premium -->
-                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(30, 58, 138, 0.08); padding: 8px 16px; border-radius: 30px; margin-bottom: 20px;" data-aos="fade-up">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E3A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                    <span style="font-size: 13px; font-weight: 700; color: #1E3A8A; text-transform: uppercase; letter-spacing: 1.5px;">
-                        {{ $servicesSection->title ?? 'Layanan Kami' }}
-                    </span>
-                </div>
-
+                <!-- Subtitle Premium Removed -->
                 <!-- Heading (Sama Persis 100% dengan Request) -->
                 <h2 style="font-size: clamp(28px, 4vw, 42px); color: #111827; font-weight: 700; line-height: 1.2; letter-spacing: -1px; margin-bottom: 0;" data-aos="fade-up" data-aos-delay="100">
                     {{ $servicesSection->heading ?? 'Layanan Profesional untuk Kebutuhan Industri Anda' }}
@@ -525,7 +504,7 @@
                     <div class="vl-choose-content4">
                         <!-- section title start -->
                         <div class="vl-section-title mb-60">
-                            <h4 class="subtitle subtitle-5-1" data-aos="zoom-in-up"> <span><img loading="lazy" class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.4.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> {{ $projectsSection->subtitle ?? 'Portfolio Kami' }}</h4>
+
                             <h2 class="title text-effect">{{ $projectsSection->heading ?? 'Proyek-Proyek Unggulan Kami' }}</h2>
                         </div> <!-- section title End -->
                     </div>
@@ -633,14 +612,7 @@
         <!-- Header Section -->
         <div class="row align-items-end mb-5">
             <div class="col-lg-8">
-                <!-- Subtitle Badge -->
-                <div style="display: inline-flex !important; align-items: center !important; gap: 10px !important; background: rgba(30, 58, 138, 0.1) !important; padding: 10px 24px !important; border-radius: 50px !important; margin-bottom: 20px !important;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E3A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                    <span style="font-size: 13px !important; font-weight: 800 !important; color: #1E3A8A !important; text-transform: uppercase !important; letter-spacing: 2px !important; line-height: 1 !important;">
-                        {{ $workProcessSection->subtitle ?? 'Info & Panduan' }}
-                    </span>
-                </div>
-
+                <!-- Subtitle Badge Removed -->
                 <!-- Headline Utama (Style 100% Sesuai Request) -->
                 <h2 style="font-size: clamp(28px, 4vw, 42px); color: #111827; font-weight: 700; line-height: 1.2; letter-spacing: -1px; margin-bottom: 0;" data-aos="fade-up">
                     {{ $workProcessSection->heading ?? 'Panduan Singkat Layanan Kami' }}
@@ -726,7 +698,7 @@
                 <div class="col-xl-6 col-lg-6 mb-30">
                     <div class="vl-choose-content5">
                         <div class="vl-section-title mb-32">
-                            <h4 class="subtitle subtitle-5-1" data-aos="zoom-in-up"> <span><img loading="lazy" class="circle" src="{{ asset("assets/img/barfi/icon/sub-title-icon1.4.svg") }}" alt="PT. Borneo Iban Jaya Perkasa"></span> {{ $whyChooseUsSection->title ?? 'Mengapa Pilih Kami' }}</h4>
+
                             <h2 class="title pb-16 text-effect">{{ $whyChooseUsSection->heading ?? 'Kualitas & Kepercayaan, Setiap Proyek, Setiap Detail' }}</h2>
                             <p class="para">{{ $whyChooseUsSection->content ?? 'Memilih PT. Borneo Iban Jaya Perkasa berarti memilih tim yang peduli dengan kebutuhan industri Anda. Kami menggabungkan pengalaman, presisi, dan keandalan untuk memberikan produk dan jasa berkualitas tinggi yang memenuhi standar industri.' }}</p>
                         </div>
@@ -757,14 +729,7 @@
         <!-- Header Section -->
         <div class="row align-items-end mb-5">
             <div class="col-lg-7">
-                <!-- Subtitle Badge - CONSISTENT STYLE -->
-                <div style="display: inline-flex !important; align-items: center !important; gap: 10px !important; background: rgba(30, 58, 138, 0.08) !important; padding: 10px 24px !important; border-radius: 50px !important; margin-bottom: 20px !important;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E3A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                    <span style="font-size: 13px !important; font-weight: 800 !important; color: #1E3A8A !important; text-transform: uppercase !important; letter-spacing: 2px !important; line-height: 1 !important;">
-                        {{ $testimonialsSection->subtitle ?? 'Testimoni' }}
-                    </span>
-                </div>
-
+                <!-- Subtitle Badge - CONSISTENT STYLE Removed -->
                 <!-- Headline (Style 100% Identik) -->
                 <h2 style="font-size: clamp(28px, 4vw, 42px); color: #111827; font-weight: 700; line-height: 1.2; letter-spacing: -1px; margin-bottom: 0;" data-aos="fade-up">
                     {{ $testimonialsSection->heading ?? 'Apa Kata Klien Kami' }}
@@ -898,14 +863,7 @@
         <!-- Header Section -->
         <div class="row mb-5 justify-content-center">
             <div class="col-lg-8 text-center">
-                <!-- Subtitle Badge (Consistent) -->
-                <div style="display: inline-flex !important; align-items: center !important; gap: 10px !important; background: rgba(30, 58, 138, 0.08) !important; padding: 10px 24px !important; border-radius: 50px !important; margin-bottom: 20px !important;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E3A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    <span style="font-size: 13px !important; font-weight: 800 !important; color: #1E3A8A !important; text-transform: uppercase !important; letter-spacing: 2px !important; line-height: 1 !important;">
-                        {{ $blogSection->subtitle ?? 'Blog & Berita' }}
-                    </span>
-                </div>
-
+                <!-- Subtitle Badge (Consistent) Removed -->
                 <!-- Headline (Consistent Style) -->
                 <h2 style="font-size: clamp(28px, 4vw, 42px); color: #111827; font-weight: 700; line-height: 1.2; letter-spacing: -1px; margin-bottom: 0;" data-aos="fade-up">
                     {{ $blogSection->heading ?? 'Update Terbaru dari Industri' }}
