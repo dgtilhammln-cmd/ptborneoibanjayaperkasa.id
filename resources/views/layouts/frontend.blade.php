@@ -199,6 +199,9 @@
     </script>
 
     @stack('js')
+
+    <!-- WhatsApp Leads Tracking Feature -->
+    @include('partials.wa-leads-modal')
 </body>
 
 </html>

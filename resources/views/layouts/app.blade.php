@@ -696,6 +696,11 @@
                     <span>User Management</span>
                 </a>
 
+                <a href="{{ route('admin.leads.index') }}" class="nav-link {{ request()->routeIs('admin.leads.*') ? 'active' : '' }}">
+                    <i class="mdi mdi-account-star-outline"></i>
+                    <span>Leads Tracking</span>
+                </a>
+
                 <a href="{{ route('admin.analytics.index') }}" class="nav-link {{ request()->routeIs('admin.analytics.*') ? 'active' : '' }}">
                     <i class="mdi mdi-chart-line"></i>
                     <span>Analytics</span>

@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
                         {{ __('Users') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.leads.index')" :active="request()->routeIs('admin.leads.*')">
+                        {{ __('Leads Tracking') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.home-content.index')" :active="request()->routeIs('admin.home-content.*')">
                         {{ __('Home Content') }}
                     </x-nav-link>

@@ -62,6 +62,13 @@
                 <span class="menu-title">Users</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.leads.index') }}"
+                class="nav-link {{ request()->routeIs('admin.leads.*') ? 'active' : '' }}">
+                <i class="mdi mdi-account-star menu-icon"></i>
+                <span class="menu-title">Leads Tracking</span>
+            </a>
+        </li>
         <li class="nav-item mt-5">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

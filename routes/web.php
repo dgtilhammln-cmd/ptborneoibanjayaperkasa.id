@@ -30,6 +30,9 @@ Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
 Route::post('/api/track/cta', [TrackingController::class, 'trackCta'])->name('track.cta');
 Route::post('/api/track/blog/{blogId}', [TrackingController::class, 'trackBlogView'])->name('track.blog.view');
 
+// Leads API
+Route::post('/api/leads', [\App\Http\Controllers\LeadController::class, 'store'])->name('api.leads.store');
+
 require __DIR__ . '/admin.php';
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
