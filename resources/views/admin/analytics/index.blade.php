@@ -195,13 +195,14 @@
             };
 
         $waClicks    = $stats['cta_clicks']['by_type']->where('cta_type', 'whatsapp')->first()->clicks ?? 0;
-        $phoneClicks = $stats['cta_clicks']['by_type']->where('cta_type', 'phone')->first()->clicks ?? 0;
+        $totalLeads  = \App\Models\Lead::count();
+        $newLeads    = \App\Models\Lead::where('status', 'new')->count();
 
         $stat_items = [
             ['label' => 'Pengunjung',        'val' => $stats['visitors']['period'],   'icon' => 'mdi-account-group-outline',    'color' => 'blue'],
             ['label' => 'Tampilan Halaman',  'val' => $stats['page_views']['period'], 'icon' => 'mdi-eye-outline',              'color' => 'green'],
-            ['label' => 'WA Leads',          'val' => $waClicks,                      'icon' => 'mdi-whatsapp',                 'color' => 'green'],
-            ['label' => 'Telepon Masuk',     'val' => $phoneClicks,                   'icon' => 'mdi-phone-incoming-outline',   'color' => 'amber'],
+            ['label' => 'WA Leads (Klik)',   'val' => $waClicks,                      'icon' => 'mdi-whatsapp',                 'color' => 'green'],
+            ['label' => 'Leads Tersimpan',   'val' => $totalLeads,                    'icon' => 'mdi-account-star-outline',     'color' => 'amber'],
         ];
     @endphp
 
@@ -218,19 +219,71 @@
         @endforeach
     </div>
 
-    {{-- Chart --}}
+    {{-- Trend Chart --}}
     <div class="card-lux fu" style="animation-delay:.16s;margin-bottom:1.25rem;">
         <div class="card-head">
             <h3><span class="live-dot"></span> Tren Visual Konversi</h3>
             <div class="chart-legend">
                 <div class="leg-item"><div class="leg-dot" style="background:#3b6ef8;"></div> Pengunjung</div>
                 <div class="leg-item"><div class="leg-dot" style="background:#22c55e;"></div> WA Leads</div>
-                <div class="leg-item"><div class="leg-dot" style="background:#f59e0b;"></div> Telepon</div>
             </div>
         </div>
         <div class="chart-wrap">
             <div class="chart-box">
                 <canvas id="unifiedChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    {{-- Geolocation Chart --}}
+    @php
+        $geoLeads = \App\Models\Lead::selectRaw('TRIM(SUBSTRING_INDEX(company_location, "-", -1)) as region, COUNT(*) as total')
+            ->whereNotNull('company_location')
+            ->groupBy('region')
+            ->orderByDesc('total')
+            ->limit(10)
+            ->get();
+        $geoLeadsLabels = $geoLeads->pluck('region')->map(fn($r) => trim($r))->toArray();
+        $geoLeadsData   = $geoLeads->pluck('total')->toArray();
+
+        // UTM Source breakdown from leads
+        $utmSources = \App\Models\Lead::selectRaw('COALESCE(utm_source, "Organik") as source, COUNT(*) as total')
+            ->groupBy('source')
+            ->orderByDesc('total')
+            ->limit(8)
+            ->get();
+        $utmLabels = $utmSources->pluck('source')->toArray();
+        $utmData   = $utmSources->pluck('total')->toArray();
+    @endphp
+
+    <div class="grid-2 fu" style="animation-delay:.18s;margin-bottom:1.25rem;">
+        {{-- Geolocation Bar Chart --}}
+        <div class="card-lux">
+            <div class="card-head">
+                <h3><i class="mdi mdi-map-marker-radius-outline" style="color:#3b6ef8;"></i> Sebaran Lokasi Leads</h3>
+            </div>
+            <div class="chart-wrap" style="padding:1.2rem;">
+                <div class="chart-box" style="height:250px;">
+                    <canvas id="geoChart"></canvas>
+                </div>
+                @if(count($geoLeadsData) === 0)
+                    <div style="text-align:center;color:var(--text-muted);padding:30px 0;font-size:.83rem;"><i class="mdi mdi-map-marker-off-outline" style="font-size:2rem;display:block;margin-bottom:6px;"></i>Belum ada data lokasi leads</div>
+                @endif
+            </div>
+        </div>
+
+        {{-- UTM Source Doughnut Chart --}}
+        <div class="card-lux">
+            <div class="card-head">
+                <h3><i class="mdi mdi-source-branch" style="color:#22c55e;"></i> Sumber Leads (UTM)</h3>
+            </div>
+            <div class="chart-wrap" style="padding:1.2rem;">
+                <div style="position:relative;height:250px;display:flex;align-items:center;justify-content:center;">
+                    <canvas id="utmChart"></canvas>
+                </div>
+                @if(count($utmData) === 0)
+                    <div style="text-align:center;color:var(--text-muted);padding:30px 0;font-size:.83rem;"><i class="mdi mdi-chart-pie-outline" style="font-size:2rem;display:block;margin-bottom:6px;"></i>Belum ada data UTM source</div>
+                @endif
             </div>
         </div>
     </div>
@@ -352,7 +405,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const labels      = chartDates.map(s => new Date(`${s}T00:00:00`).toLocaleDateString('id-ID', { month: 'short', day: 'numeric' }));
     const visitorData = chartDates.map(s => (dailyStats.visitors   || []).find(d => d.date === s)?.count ?? 0);
     const waData      = chartDates.map(s => (dailyStats.cta_clicks || []).find(d => d.date === s && d.type === 'whatsapp')?.count ?? 0);
-    const phoneData   = chartDates.map(s => (dailyStats.cta_clicks || []).find(d => d.date === s && d.type === 'phone')?.count ?? 0);
 
     // Theme colors
     const blue   = '#3b6ef8';
@@ -383,29 +435,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     label: 'WA Leads',
                     data: waData,
                     borderColor: green,
-                    backgroundColor: 'transparent',
+                    backgroundColor: 'rgba(34,197,94,0.08)',
                     tension: 0.4,
+                    fill: true,
                     pointRadius: 4,
                     pointBackgroundColor: green,
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2,
                     borderWidth: 2,
                     borderDash: [5, 4],
-                },
-                {
-                    label: 'Telepon',
-                    data: phoneData,
-                    borderColor: amber,
-                    backgroundColor: 'transparent',
-                    tension: 0.4,
-                    pointRadius: 4,
-                    pointBackgroundColor: amber,
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
-                    borderWidth: 2,
                 }
             ]
         },
+
         options: {
             responsive: true,
             maintainAspectRatio: false,
@@ -440,6 +482,105 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    // === Geolocation Bar Chart ===
+    const geoLabels = @json($geoLeadsLabels);
+    const geoData   = @json($geoLeadsData);
+    const geoColors = [
+        '#3b6ef8','#22c55e','#f59e0b','#ef4444','#8b5cf6',
+        '#06b6d4','#ec4899','#84cc16','#f97316','#14b8a6'
+    ];
+
+    if (geoLabels.length > 0) {
+        new Chart(document.getElementById('geoChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: geoLabels,
+                datasets: [{
+                    label: 'Jumlah Leads',
+                    data: geoData,
+                    backgroundColor: geoColors.slice(0, geoData.length).map(c => c + 'cc'),
+                    borderColor: geoColors.slice(0, geoData.length),
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#fff',
+                        titleColor: '#0f1724',
+                        bodyColor: '#5a6478',
+                        borderColor: '#e4e8f0',
+                        borderWidth: 1,
+                        padding: 10,
+                        titleFont: { family: "'Plus Jakarta Sans', sans-serif", weight: '700', size: 12 },
+                        bodyFont: { family: "'Plus Jakarta Sans', sans-serif", size: 12 },
+                        callbacks: { label: ctx => ` ${ctx.parsed.x} leads` }
+                    }
+                },
+                scales: {
+                    x: { grid: { color: gridC }, ticks: { color: tickC, precision: 0, font: { size: 11 } } },
+                    y: { grid: { display: false }, ticks: { color: '#0f1724', font: { size: 11, weight: '600' } } }
+                }
+            }
+        });
+    }
+
+    // === UTM Source Doughnut Chart ===
+    const utmLabels = @json($utmLabels);
+    const utmData   = @json($utmData);
+    const utmColors = ['#3b6ef8','#22c55e','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#ec4899','#84cc16'];
+
+    if (utmLabels.length > 0) {
+        new Chart(document.getElementById('utmChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: utmLabels,
+                datasets: [{
+                    data: utmData,
+                    backgroundColor: utmColors.slice(0, utmData.length).map(c => c + 'cc'),
+                    borderColor: utmColors.slice(0, utmData.length),
+                    borderWidth: 2,
+                    hoverOffset: 8,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 },
+                            color: '#5a6478',
+                            usePointStyle: true,
+                            pointStyleWidth: 8,
+                            padding: 10
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#fff',
+                        titleColor: '#0f1724',
+                        bodyColor: '#5a6478',
+                        borderColor: '#e4e8f0',
+                        borderWidth: 1,
+                        padding: 10,
+                        callbacks: {
+                            label: ctx => ` ${ctx.label}: ${ctx.parsed} leads (${Math.round(ctx.parsed/utmData.reduce((a,b)=>a+b,0)*100)}%)`
+                        }
+                    }
+                }
+            }
+        });
+    }
 });
 </script>
 @endpush

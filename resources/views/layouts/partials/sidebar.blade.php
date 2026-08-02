@@ -28,6 +28,13 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="{{ route('admin.analytics.index') }}"
+                class="nav-link {{ request()->routeIs('admin.analytics.*') ? 'active' : '' }}">
+                <i class="mdi mdi-chart-line menu-icon"></i>
+                <span class="menu-title">Analytics</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('admin.blog.index') }}"
                 class="nav-link {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}">
                 <i class="mdi mdi-file-document menu-icon"></i>
