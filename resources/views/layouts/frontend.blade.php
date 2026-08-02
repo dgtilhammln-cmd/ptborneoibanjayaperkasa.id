@@ -91,7 +91,7 @@
     </script>
     
     <!-- Critical CSS - Load immediately for above-the-fold content -->
-    <script>loadCSS("{{ asset('assets/css/barfi/style.min.css') }}","stylesheet");</script>
+    <link rel="stylesheet" href="{{ asset('assets/css/barfi/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/swiper-bundle.min.css') }}" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="{{ asset('assets/css/barfi/plugins/swiper-bundle.min.css') }}"></noscript>
     
