@@ -131,24 +131,28 @@
             $logo = \App\Models\Setting::get('site_logo');
             $logoUrl = $logo ? asset($logo) : asset('assets/images/logo.svg');
         @endphp
-        <img src="{{ $logoUrl }}" alt="Loading..." style="height:50px; animation: pulseLoad 1.2s infinite ease-in-out;">
+        <img src="{{ $logoUrl }}" alt="Loading..." style="height:55px; animation: zoomInSlow 1.5s ease-out forwards;">
         <style>
-            @keyframes pulseLoad {
-                0% { transform: scale(0.9); opacity: 0.6; }
-                50% { transform: scale(1.1); opacity: 1; }
-                100% { transform: scale(0.9); opacity: 0.6; }
+            @keyframes zoomInSlow {
+                0% { transform: scale(1); opacity: 0; }
+                20% { opacity: 1; }
+                100% { transform: scale(1.15); opacity: 1; }
             }
             body { overflow: hidden; } /* Prevent scroll during load */
         </style>
     </div>
     <script>
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('simple-preloader');
-            if(preloader) {
-                preloader.style.opacity = '0';
-                document.body.style.overflow = 'auto';
-                setTimeout(() => { preloader.remove(); }, 500);
-            }
+        // Use DOMContentLoaded and a short timeout instead of window.onload
+        // Waiting for window.onload destroys PageSpeed LCP score if images are large!
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const preloader = document.getElementById('simple-preloader');
+                if(preloader) {
+                    preloader.style.opacity = '0';
+                    document.body.style.overflow = 'auto';
+                    setTimeout(() => { preloader.remove(); }, 500);
+                }
+            }, 400); // Only show for 400ms after DOM is ready
         });
     </script>
 
