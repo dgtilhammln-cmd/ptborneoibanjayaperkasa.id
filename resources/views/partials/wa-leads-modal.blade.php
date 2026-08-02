@@ -55,8 +55,8 @@
 }
 
 #waLeadModal .modal-header {
-    background: #0f172a; /* Dark slate premium */
-    color: #fff;
+    background: {{ \App\Models\Setting::get('footer_background_color', '#1a1a1a') }}; /* Match footer color */
+    color: {{ \App\Models\Setting::get('footer_text_color', '#ffffff') }};
     border-bottom: none;
     padding: 32px 32px 24px;
     position: relative;
