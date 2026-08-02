@@ -339,6 +339,15 @@
                                 <span class="char-count" id="md-count">{{ strlen(old('meta_description', $blog->meta_description ?? '')) }}/160</span>
                             </div>
                         </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label class="fl" for="meta_keywords"><i class="mdi mdi-tag-multiple-outline"></i> Meta Keywords</label>
+                            <input type="text" name="meta_keywords" id="meta_keywords"
+                                value="{{ old('meta_keywords', $blog->meta_keywords) }}"
+                                class="fi" placeholder="Pisahkan dengan koma. Contoh: alat berat, sparepart, kalimantan">
+                            <div class="char-info">
+                                <span style="font-size:.68rem;color:var(--text-muted);">Masukkan kata kunci yang relevan (opsional)</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="seo-preview">
                         <div class="prev-label">Pratinjau di Google</div>

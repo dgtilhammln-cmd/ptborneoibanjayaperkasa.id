@@ -646,6 +646,13 @@
         </div>
 
         <!-- Navigation Content -->
+        @php
+            try {
+                $newLeadsCount = \App\Models\Lead::where('status', 'new')->count();
+            } catch (\Exception $e) {
+                $newLeadsCount = 0;
+            }
+        @endphp
         <nav class="sidebar-content">
             <!-- Main Menu Section -->
             <div class="sidebar-section">
@@ -662,8 +669,13 @@
                 </a>
 
                 <a href="{{ route('admin.leads.index') }}" class="nav-link {{ request()->routeIs('admin.leads.*') ? 'active' : '' }}">
-                    <i class="mdi mdi-account-star-outline"></i>
-                    <span>Leads Tracking</span>
+                    <div style="display:flex; align-items:center; gap:12px; flex:1;">
+                        <i class="mdi mdi-account-star-outline"></i>
+                        <span>Leads Tracking</span>
+                    </div>
+                    @if($newLeadsCount > 0)
+                        <span style="background:var(--accent-red); color:#fff; font-size:0.7rem; font-weight:700; padding:2px 6px; border-radius:10px; line-height:1;">{{ $newLeadsCount }}</span>
+                    @endif
                 </a>
 
                 <a href="{{ route('admin.blog.index') }}" class="nav-link {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}">

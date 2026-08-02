@@ -245,11 +245,21 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Utility to get URL parameters (UTM)
     function getQueryParam(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
     }
+
+    let userLocation = '';
+    
+    // Auto-fetch location dari IP User
+    fetch('http://ip-api.com/json/')
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                userLocation = data.regionName || data.city;
+            }
+        }).catch(err => console.log('IP Location fetch failed'));
 
     // Intercept all WhatsApp links dynamically
     document.body.addEventListener('click', function(e) {
@@ -282,6 +292,12 @@ document.addEventListener('DOMContentLoaded', function() {
         spinner.classList.remove('d-none');
         
         const formData = new FormData(this);
+        
+        // Append auto-detected IP Location if exists
+        let companyVal = document.getElementById('leadCompany').value;
+        if (userLocation) {
+            formData.set('company_location', companyVal + ' - ' + userLocation);
+        }
         
         // Add Tracking Data
         formData.append('source_url', window.location.href);

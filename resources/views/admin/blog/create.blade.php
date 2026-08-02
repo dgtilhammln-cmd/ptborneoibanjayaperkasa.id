@@ -291,6 +291,13 @@
                                 <span class="char-count" id="md-count">0/160</span>
                             </div>
                         </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label class="fl" for="meta_keywords"><i class="mdi mdi-tag-multiple-outline"></i> Meta Keywords</label>
+                            <input type="text" name="meta_keywords" id="meta_keywords" value="{{ old('meta_keywords') }}" class="fi" placeholder="Pisahkan dengan koma. Contoh: alat berat, sparepart, kalimantan">
+                            <div class="char-info">
+                                <span style="font-size:.68rem;color:var(--text-muted);">Masukkan kata kunci yang relevan (opsional)</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="seo-preview">
                         <div class="prev-label">Pratinjau di Google</div>
@@ -303,8 +310,7 @@
             <div class="form-actions">
                 <a href="{{ route('admin.blog.index') }}" class="btn-ghost"><i class="mdi mdi-close"></i> Batalkan</a>
                 <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
-                    <button type="submit" name="status" value="draft" class="btn-ghost"><i class="mdi mdi-content-save-outline"></i> Simpan Draft</button>
-                    <button type="submit" name="status" value="published" class="btn-p"><i class="mdi mdi-rocket-launch-outline"></i> Terbitkan Sekarang</button>
+                    <button type="submit" class="btn-p"><i class="mdi mdi-content-save-outline"></i> Simpan Artikel</button>
                 </div>
             </div>
         </div>
