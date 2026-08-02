@@ -195,8 +195,13 @@
             };
 
         $waClicks    = $stats['cta_clicks']['by_type']->where('cta_type', 'whatsapp')->first()->clicks ?? 0;
-        $totalLeads  = \App\Models\Lead::count();
-        $newLeads    = \App\Models\Lead::where('status', 'new')->count();
+        try {
+            $totalLeads = \App\Models\Lead::count();
+            $newLeads   = \App\Models\Lead::where('status', 'new')->count();
+        } catch (\Exception $e) {
+            $totalLeads = 0;
+            $newLeads   = 0;
+        }
 
         $stat_items = [
             ['label' => 'Pengunjung',        'val' => $stats['visitors']['period'],   'icon' => 'mdi-account-group-outline',    'color' => 'blue'],
