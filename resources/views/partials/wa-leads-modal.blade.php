@@ -300,8 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const name = document.getElementById('leadName').value;
                 const company = document.getElementById('leadCompany').value;
                 const req = document.getElementById('leadReq').value;
-                
-                const customMessage = `*Pesan dari Website ptborneoibanjayaperkasa.id*\n\n*Nama:* ${name}\n*Perusahaan/Lokasi:* ${company}\n*Kebutuhan:* ${req}\n\n*URL:* ${window.location.href}`;
+                const customMessage = `Halo PT. Borneo Iban Jaya Perkasa, perkenalkan saya *${name}* dari *${company}*.\n\nSaya mendapatkan info dari website ptborneoibanjayaperkasa.id dan ingin menanyakan/berkonsultasi mengenai:\n"${req}"\n\nMohon info lebih lanjut. Terima kasih.\n\n_(Ref: ${window.location.href})_`;
                 
                 // Get original target URL
                 let targetUrl = document.getElementById('waTargetUrl').value;
