@@ -661,6 +661,11 @@
                     <span>Analytics</span>
                 </a>
 
+                <a href="{{ route('admin.leads.index') }}" class="nav-link {{ request()->routeIs('admin.leads.*') ? 'active' : '' }}">
+                    <i class="mdi mdi-account-star-outline"></i>
+                    <span>Leads Tracking</span>
+                </a>
+
                 <a href="{{ route('admin.blog.index') }}" class="nav-link {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}">
                     <i class="mdi mdi-newspaper-variant-outline"></i>
                     <span>Blog Content</span>
@@ -699,11 +704,6 @@
                 <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                     <i class="mdi mdi-account-group-outline"></i>
                     <span>User Management</span>
-                </a>
-
-                <a href="{{ route('admin.leads.index') }}" class="nav-link {{ request()->routeIs('admin.leads.*') ? 'active' : '' }}">
-                    <i class="mdi mdi-account-star-outline"></i>
-                    <span>Leads Tracking</span>
                 </a>
 
                 <a href="{{ route('admin.settings.index') }}" class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
