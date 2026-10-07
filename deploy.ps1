@@ -69,16 +69,11 @@ Write-Host "[4/4] SSH ke Hostinger ${SSH_USER}@${SSH_HOST} (port $SSH_PORT)..." 
 Write-Host "      Dir server: $REMOTE_PATH" -ForegroundColor DarkGray
 Write-Host ""
 
-ssh -p $SSH_PORT -o StrictHostKeyChecking=no "${SSH_USER}@${SSH_HOST}" @"
-cd $REMOTE_PATH
-git remote set-url origin $GIT_REPO
-git pull origin $GIT_BRANCH
-php artisan config:cache
-php artisan view:cache
-php artisan route:cache
-echo ''
-echo '=== SERVER UPDATED OK ==='
-"@
+$cmd1 = "git -C $REMOTE_PATH remote set-url origin $GIT_REPO"
+$cmd2 = "git -C $REMOTE_PATH pull origin $GIT_BRANCH"
+$cmd3 = "cd $REMOTE_PATH && php artisan config:cache && php artisan view:cache && php artisan route:cache && echo '=== SERVER UPDATED OK ==='"
+
+ssh -p $SSH_PORT -o StrictHostKeyChecking=no -o BatchMode=no "${SSH_USER}@${SSH_HOST}" "$cmd1 && $cmd2 && $cmd3"
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host ""
