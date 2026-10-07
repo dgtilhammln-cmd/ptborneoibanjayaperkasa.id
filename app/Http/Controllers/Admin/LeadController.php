@@ -23,7 +23,9 @@ class LeadController extends Controller
         $startDate = $request->get('start_date');
         $endDate = $request->get('end_date');
 
-        if ($period === '30_days') {
+        if ($period === '7_days') {
+            $query->where('created_at', '>=', Carbon::now()->subDays(7));
+        } elseif ($period === '30_days') {
             $query->where('created_at', '>=', Carbon::now()->subDays(30));
         } elseif ($period === '90_days') {
             $query->where('created_at', '>=', Carbon::now()->subDays(90));
@@ -58,7 +60,9 @@ class LeadController extends Controller
 
         // 4. Calculate Stat Counts for Selected Period
         $statsBaseQuery = Lead::query();
-        if ($period === '30_days') {
+        if ($period === '7_days') {
+            $statsBaseQuery->where('created_at', '>=', Carbon::now()->subDays(7));
+        } elseif ($period === '30_days') {
             $statsBaseQuery->where('created_at', '>=', Carbon::now()->subDays(30));
         } elseif ($period === '90_days') {
             $statsBaseQuery->where('created_at', '>=', Carbon::now()->subDays(90));

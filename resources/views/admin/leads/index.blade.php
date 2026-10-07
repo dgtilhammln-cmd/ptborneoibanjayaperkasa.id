@@ -497,8 +497,9 @@
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                     Periode:
                 </label>
-                <select name="period" id="periodSelect" class="filter-select-box" onchange="toggleCustomDates()">
+                <select name="period" id="periodSelect" class="filter-select-box" onchange="handlePeriodChange()">
                     <option value="all" {{ $period == 'all' ? 'selected' : '' }}>Semua Waktu</option>
+                    <option value="7_days" {{ $period == '7_days' ? 'selected' : '' }}>7 Hari Terakhir</option>
                     <option value="30_days" {{ $period == '30_days' ? 'selected' : '' }}>30 Hari Terakhir</option>
                     <option value="90_days" {{ $period == '90_days' ? 'selected' : '' }}>90 Hari Terakhir</option>
                     <option value="1_year" {{ $period == '1_year' ? 'selected' : '' }}>1 Tahun Terakhir</option>
@@ -558,8 +559,18 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
                 Daftar Leads Masuk
                 <span style="background: #eff6ff; color: #0066ff; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; border: 1px solid #bfdbfe;">
-                    {{ $leads->total() }} Total
+                    {{ $leads->total() }} data
                 </span>
+                @if($period !== 'all')
+                <span style="background: #f0fdf4; color: #15803d; font-size: 0.7rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; border: 1px solid #bbf7d0;">
+                    @if($period === '7_days') 7 Hari Terakhir
+                    @elseif($period === '30_days') 30 Hari Terakhir
+                    @elseif($period === '90_days') 90 Hari Terakhir
+                    @elseif($period === '1_year') 1 Tahun Terakhir
+                    @elseif($period === 'custom') Custom: {{ $startDate }} s/d {{ $endDate }}
+                    @endif
+                </span>
+                @endif
             </div>
         </div>
 
@@ -834,14 +845,21 @@
 
 @push('js')
 <script>
-function toggleCustomDates() {
+function handlePeriodChange() {
     const period = document.getElementById('periodSelect').value;
     const customWrap = document.getElementById('customDateWrap');
     if (period === 'custom') {
+        // Tampilkan date picker, jangan auto-submit dulu
         customWrap.style.display = 'flex';
     } else {
+        // Untuk periode preset: langsung submit form
         customWrap.style.display = 'none';
+        document.getElementById('leadFilterForm').submit();
     }
+}
+
+function toggleCustomDates() {
+    handlePeriodChange();
 }
 
 document.addEventListener('click', function(e) {
