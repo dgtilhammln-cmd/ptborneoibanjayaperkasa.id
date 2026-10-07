@@ -239,17 +239,21 @@
                 </div>
                 <div class="card-body">
                     <div class="status-card">
-                        <label class="status-option" style="background:var(--accent-green-soft);border-color:rgba(34,197,94,.25);">
-                            <input type="radio" name="status" value="published" checked style="display:none;">
+                        <label class="status-option status-opt" id="opt-published" style="background:var(--accent-green-soft);border-color:rgba(34,197,94,.25);">
+                            <input type="radio" name="status" value="published" id="radio-published" checked style="display:none;">
                             <div class="s-dot" style="background:var(--accent-green);"></div>
                             <div><div class="s-label">Publikasikan</div><div class="s-desc">Langsung tampil di halaman depan</div></div>
-                            <i class="mdi mdi-check-circle-outline" style="margin-left:auto;color:var(--accent-green);font-size:1rem;"></i>
+                            <span class="s-check-icon" style="margin-left:auto;">
+                                <svg id="icon-published" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </span>
                         </label>
-                        <label class="status-option">
-                            <input type="radio" name="status" value="draft" style="display:none;">
+                        <label class="status-option status-opt" id="opt-draft">
+                            <input type="radio" name="status" value="draft" id="radio-draft" style="display:none;">
                             <div class="s-dot" style="background:#eab308;"></div>
                             <div><div class="s-label">Simpan Draft</div><div class="s-desc">Tersimpan, belum dipublikasikan</div></div>
-                            <i class="mdi mdi-circle-outline" style="margin-left:auto;color:var(--text-muted);font-size:1rem;"></i>
+                            <span class="s-check-icon" style="margin-left:auto;">
+                                <svg id="icon-draft" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+                            </span>
                         </label>
                     </div>
                     <div style="margin-top:.9rem;padding:.8rem;background:var(--accent-soft);border-radius:var(--r-xs);border:1px solid rgba(59,110,248,.15);">
@@ -378,22 +382,74 @@ document.addEventListener('DOMContentLoaded', function () {
         r.readAsDataURL(this.files[0]);
     });
 
-    // Status highlight
-    document.querySelectorAll('input[name="status"]').forEach(radio => {
-        radio.addEventListener('change', function () {
-            document.querySelectorAll('.status-option').forEach(o => {
-                o.style.background = ''; o.style.borderColor = 'transparent';
-            });
-            const lbl = this.closest('label');
-            if (this.value === 'published') {
-                lbl.style.background = 'var(--accent-green-soft)';
-                lbl.style.borderColor = 'rgba(34,197,94,.25)';
-            } else {
-                lbl.style.background = '#fefce8';
-                lbl.style.borderColor = 'rgba(202,138,4,.2)';
+    // ── Status Publikasi – Fully Interactive ──────────────────────
+    function applyStatusUI(selectedValue) {
+        const configs = {
+            published: {
+                optId: 'opt-published',
+                iconId: 'icon-published',
+                bg: 'var(--accent-green-soft)',
+                border: 'rgba(34,197,94,.25)',
+                iconColor: 'var(--accent-green)',
+                iconPath: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+                strokeWidth: '2.5'
+            },
+            draft: {
+                optId: 'opt-draft',
+                iconId: 'icon-draft',
+                bg: '#fefce8',
+                border: 'rgba(202,138,4,.2)',
+                iconColor: '#eab308',
+                iconPath: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+                strokeWidth: '2.5'
+            }
+        };
+        const inactiveIconSvg = '<circle cx="12" cy="12" r="10"/>';
+
+        // Reset semua option
+        document.querySelectorAll('.status-opt').forEach(opt => {
+            opt.style.background = '';
+            opt.style.borderColor = 'transparent';
+        });
+        Object.keys(configs).forEach(val => {
+            const ico = document.getElementById('icon-' + val);
+            if (ico) {
+                ico.setAttribute('stroke', 'var(--text-muted)');
+                ico.setAttribute('stroke-width', '2');
+                ico.innerHTML = inactiveIconSvg;
+            }
+        });
+
+        // Aktifkan option yang dipilih
+        const cfg = configs[selectedValue];
+        if (!cfg) return;
+        const activeOpt = document.getElementById(cfg.optId);
+        const activeIco = document.getElementById(cfg.iconId);
+        if (activeOpt) {
+            activeOpt.style.background = cfg.bg;
+            activeOpt.style.borderColor = cfg.border;
+        }
+        if (activeIco) {
+            activeIco.setAttribute('stroke', cfg.iconColor);
+            activeIco.setAttribute('stroke-width', cfg.strokeWidth);
+            activeIco.innerHTML = cfg.iconPath;
+        }
+    }
+
+    // Klik pada label → set radio & update UI
+    document.querySelectorAll('.status-opt').forEach(label => {
+        label.addEventListener('click', function (e) {
+            const radio = this.querySelector('input[type="radio"]');
+            if (radio) {
+                radio.checked = true;
+                applyStatusUI(radio.value);
             }
         });
     });
+
+    // Inisialisasi tampilan berdasarkan status awal yang di-checked
+    const checkedRadio = document.querySelector('input[name="status"]:checked');
+    if (checkedRadio) applyStatusUI(checkedRadio.value);
 });
 </script>
 @endpush
