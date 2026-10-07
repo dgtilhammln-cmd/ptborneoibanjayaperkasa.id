@@ -1,57 +1,88 @@
-# ============================================================
-# DEPLOY SCRIPT - ptborneoibanjayaperkasa.id
-# Usage: .\deploy.ps1 "pesan commit kamu"
-# ============================================================
+# =====================================================
+#  DEPLOY - PT Borneo Iban Jaya Perkasa
+#  Usage  : ./deploy
+#  Custom : ./deploy "pesan commit custom"
+# =====================================================
 
 param(
-    [string]$CommitMessage = "Update website"
+    [string]$CommitMessage = ""
 )
 
-$SSH_HOST = "46.202.186.86"
-$SSH_PORT  = "65002"
-$SSH_USER  = "u664715641"
-$REMOTE_PATH = "/home/u664715641/public_html"
+$GIT_REPO    = "https://github.com/dgtilhammln-cmd/ptborneoibanjayaperkasa.id.git"
+$GIT_BRANCH  = "main"
+$SSH_USER    = "u664715641"
+$SSH_HOST    = "46.202.186.86"
+$SSH_PORT    = "65002"
+$REMOTE_PATH = "/home/u664715641/domains/ptborneoibanjayaperkasa.id/public_html"
 
 Write-Host ""
-Write-Host "=======================================" -ForegroundColor Cyan
-Write-Host "  DEPLOY - ptborneoibanjayaperkasa.id  " -ForegroundColor Cyan
-Write-Host "=======================================" -ForegroundColor Cyan
+Write-Host "  =====================================================" -ForegroundColor Cyan
+Write-Host "   DEPLOY - ptborneoibanjayaperkasa.id" -ForegroundColor Cyan
+Write-Host "  =====================================================" -ForegroundColor Cyan
 Write-Host ""
 
-# Step 1: Git add semua perubahan
-Write-Host "[1/4] Staging semua perubahan..." -ForegroundColor Yellow
-git add .
-
-# Step 2: Git commit
-Write-Host "[2/4] Commit: $CommitMessage" -ForegroundColor Yellow
-git commit -m "$CommitMessage"
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "Tidak ada perubahan untuk di-commit, atau terjadi error." -ForegroundColor Red
+# ── Commit message: custom atau otomatis timestamp ────────────
+if ($CommitMessage -eq "") {
+    $CommitMessage = "Update: $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 }
 
-# Step 3: Push ke GitHub
-Write-Host "[3/4] Push ke GitHub..." -ForegroundColor Yellow
-git push origin main
+# ── Step 1: Cek file yang berubah ────────────────────────────
+Write-Host "[1/4] File yang berubah:" -ForegroundColor Yellow
+Write-Host "-----------------------------------------------" -ForegroundColor DarkGray
+git status --short
+Write-Host "-----------------------------------------------" -ForegroundColor DarkGray
+Write-Host ""
+
+# git add -u = HANYA file yang sudah ditrack dan berubah
+# (tidak include file/folder baru yang belum pernah di-commit)
+git add -u
+
+# Cek apakah ada staged changes
+$staged = git diff --cached --name-only
+if (-not $staged) {
+    Write-Host "[INFO] Tidak ada perubahan file yang ditrack. Lanjut ke server..." -ForegroundColor DarkYellow
+} else {
+    # ── Step 2: Commit ────────────────────────────────────────
+    Write-Host "[2/4] Commit: $CommitMessage" -ForegroundColor Yellow
+    Write-Host "      File yang di-commit:" -ForegroundColor DarkGray
+    $staged | ForEach-Object { Write-Host "        $_" -ForegroundColor DarkGray }
+    Write-Host ""
+    git commit -m $CommitMessage
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "[ERROR] Commit gagal!" -ForegroundColor Red
+        exit 1
+    }
+}
+
+# ── Step 3: Push ke GitHub ───────────────────────────────────
+Write-Host "[3/4] Push ke GitHub ($GIT_BRANCH)..." -ForegroundColor Yellow
+git push origin $GIT_BRANCH
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "[ERROR] Push gagal! Coba: git pull origin main --rebase" -ForegroundColor Red
+    exit 1
+}
+Write-Host "      Push GitHub: OK" -ForegroundColor Green
+
+# ── Step 4: SSH ke Hostinger ─────────────────────────────────
+Write-Host ""
+Write-Host "[4/4] SSH ke Hostinger ${SSH_USER}@${SSH_HOST} (port $SSH_PORT)..." -ForegroundColor Yellow
+Write-Host "      Dir server: $REMOTE_PATH" -ForegroundColor DarkGray
+Write-Host ""
+
+$sshCmd = "cd $REMOTE_PATH && git remote set-url origin $GIT_REPO && git pull origin $GIT_BRANCH && php artisan config:cache && php artisan view:cache && php artisan route:cache && echo '' && echo '=== SERVER UPDATED OK ==='"
+
+ssh -p $SSH_PORT -o StrictHostKeyChecking=no "${SSH_USER}@${SSH_HOST}" $sshCmd
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "GAGAL push ke GitHub!" -ForegroundColor Red
+    Write-Host ""
+    Write-Host "[ERROR] Deploy ke server gagal!" -ForegroundColor Red
     exit 1
 }
 
-Write-Host "GitHub updated!" -ForegroundColor Green
-
-# Step 4: Deploy ke server via SSH
-Write-Host "[4/4] Deploy ke server via SSH..." -ForegroundColor Yellow
-ssh -p $SSH_PORT "${SSH_USER}@${SSH_HOST}" "cd $REMOTE_PATH && git pull origin main && php artisan config:cache && php artisan route:cache && php artisan view:cache"
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "GAGAL deploy ke server! Cek koneksi SSH." -ForegroundColor Red
-    exit 1
-}
-
 Write-Host ""
-Write-Host "=======================================" -ForegroundColor Green
-Write-Host "  DEPLOY SELESAI!  " -ForegroundColor Green
-Write-Host "=======================================" -ForegroundColor Green
+Write-Host "  =====================================================" -ForegroundColor Green
+Write-Host "   DEPLOY BERHASIL!" -ForegroundColor Green
+Write-Host "   GitHub : $GIT_REPO" -ForegroundColor Green
+Write-Host "   Live   : https://ptborneoibanjayaperkasa.id" -ForegroundColor Green
+Write-Host "  =====================================================" -ForegroundColor Green
 Write-Host ""
